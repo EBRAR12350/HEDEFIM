@@ -1,0 +1,4034 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>🎯 HEDEFİM</title>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f6fb;color:#18202a}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+.auth{min-height:100vh;display:grid;place-items:center;padding:20px;background:linear-gradient(135deg,#4f46e5,#7c3aed)}
+.box{width:430px;max-width:100%;background:#fff;border-radius:24px;padding:28px;box-shadow:0 20px 60px #0003}
+.logo{text-align:center;font-size:30px;font-weight:900;margin-bottom:20px}
+.logoMark{
+  width:42px;
+  height:42px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:transparent !important;
+  border:none !important;
+  border-radius:0;
+  color:#111827;
+  font-size:13px;
+  font-weight:900;
+  position:relative;
+  margin-right:6px;
+}
+
+.logoMark::before{
+  content:"";
+  position:absolute;
+  inset:2px;
+  background:#111827;
+  clip-path:polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 100%,
+    50% 74%,
+    21% 100%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+}
+
+.logoMark::after{
+  content:"28";
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-size:10px;
+  font-weight:900;
+  z-index:2;
+}
+.logo span,.brand span{color:#5b50e8}
+.tabs,.row{display:flex;gap:8px}
+.tabs{background:#f1f3f7;padding:5px;border-radius:12px;margin-bottom:18px}
+.tabs button{flex:1;border:0;padding:10px;border-radius:9px}
+.tabs .active{background:#fff;font-weight:bold}
+.field{margin:12px 0}
+label{display:block;font-weight:bold;margin-bottom:6px}
+input,select,textarea{width:100%;padding:11px;border:1px solid #d7dbe4;border-radius:10px;outline:0}
+textarea{min-height:100px;resize:vertical}
+.btn{border:0;border-radius:10px;padding:10px 15px;background:#5b50e8;color:#fff;font-weight:bold}
+.btn.gray{background:#eef0f5;color:#333}
+.btn.green{background:#16a34a}
+.btn.red{background:#dc2626}
+.btn.orange{background:#f97316}
+.btn.small{padding:7px 10px;font-size:13px}
+.app{min-height:100vh}
+.top{height:68px;background:#fff;border-bottom:1px solid #e4e6ec;display:flex;align-items:center;justify-content:space-between;padding:0 22px;position:sticky;top:0;z-index:20;gap:15px}
+.brand{font-size:23px;font-weight:900;white-space:nowrap}
+.user{display:flex;align-items:center;gap:10px}
+.avatar{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#e8e7ff;color:#5147d9;font-weight:bold}
+.searchTop{width:300px;max-width:40vw}
+.layout{display:flex;min-height:calc(100vh - 68px)}
+.side{width:245px;background:#111827;padding:15px 12px;flex-shrink:0}
+.nav{width:100%;padding:12px;border:0;border-radius:10px;text-align:left;background:transparent;color:#cbd5e1;margin:3px 0}
+.nav:hover,.nav.active{background:#293449;color:#fff}
+.content{width:100%;max-width:1400px;margin:auto;padding:25px}
+.hero{background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;border-radius:20px;padding:27px;margin-bottom:22px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
+.card{background:#fff;border:1px solid #e2e5eb;border-radius:17px;padding:18px;box-shadow:0 5px 20px #00000008}
+.icon{font-size:38px}
+.progress{height:9px;background:#e9ebf0;border-radius:20px;overflow:hidden}
+.progress div{height:100%;background:linear-gradient(90deg,#4f46e5,#8b5cf6)}
+.stat{font-size:30px;font-weight:900}
+.muted{color:#6b7280}
+.list{display:grid;gap:10px}
+.topic{background:#fff;border:1px solid #e2e5eb;border-radius:13px;padding:14px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.badge{padding:5px 9px;border-radius:30px;background:#f1f3f5;font-size:12px}
+.done{background:#dcfce7;color:#166534}
+.lesson{line-height:1.7}
+.lessonbox{background:#fff;border:1px solid #e2e5eb;border-radius:15px;padding:20px;margin:13px 0}
+.formula{background:#f5f3ff;border-left:4px solid #6d5dfc}
+.tip{background:#ecfdf5;border-left:4px solid #16a34a}
+.warning{background:#fff7ed;border-left:4px solid #f97316}
+.example{background:#eff6ff;border-left:4px solid #3b82f6}
+.practice{background:#f0fdf4;border-left:4px solid #22c55e}
+.q{background:#fff;border:1px solid #ddd;border-radius:13px;padding:16px;margin:10px 0}
+.opt{display:block;width:100%;text-align:left;margin:7px 0;padding:10px;border:1px solid #ddd;background:#fff;border-radius:9px}
+.opt.sel{border-color:#5b50e8;background:#eef2ff}
+.msg{padding:12px;border-radius:12px;background:#f1f3f7;margin:8px 0}
+.msg.me{background:#e9e7ff;margin-left:20%}
+.searchResults{display:grid;gap:8px;margin-top:10px}
+.searchItem{padding:12px;border:1px solid #ddd;border-radius:10px;background:#fff;cursor:pointer}
+.searchItem:hover{background:#f5f3ff}
+.kpi{font-size:14px;color:#555}
+.chip{display:inline-block;padding:5px 9px;background:#eef2ff;border-radius:20px;font-size:12px;margin:3px}
+hr{border:0;border-top:1px solid #eee}
+table{width:100%;border-collapse:collapse;background:#fff}
+th,td{padding:10px;border-bottom:1px solid #eee;text-align:left}
+#surpriseLayer{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:#0005;z-index:9999;padding:20px}
+.surprise{width:min(520px,95vw);background:white;border-radius:28px;padding:30px;text-align:center;box-shadow:0 25px 80px #0005;animation:pop .35s ease}
+.surpriseEmoji{font-size:75px}
+.surpriseText{font-size:27px;font-weight:900;margin:15px 0}
+.surpriseSub{color:#6b7280;margin-bottom:20px}
+@keyframes pop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+.setting{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid #eee;gap:15px}
+.switch{width:50px;height:27px;background:#d1d5db;border-radius:30px;position:relative;border:0}
+.switch:after{content:"";position:absolute;width:21px;height:21px;border-radius:50%;background:#fff;left:3px;top:3px;transition:.2s}
+.switch.on{background:#5b50e8}
+.switch.on:after{left:26px}
+.advice{background:linear-gradient(135deg,#ecfeff,#eef2ff);border:1px solid #c7d2fe;border-radius:16px;padding:18px}
+.studyRoom{border-radius:18px;padding:20px;background:#111827;color:white}
+.online{display:inline-flex;align-items:center;gap:6px;background:#166534;padding:7px 12px;border-radius:20px;font-size:13px}
+.dot{width:8px;height:8px;border-radius:50%;background:#4ade80}
+.callBox{text-align:center;padding:30px;border-radius:20px;background:linear-gradient(135deg,#eef2ff,#f5f3ff)}
+.lesson h3{margin-top:0}
+.subjectTitle{display:flex;align-items:center;gap:12px}
+.empty{padding:25px;text-align:center;color:#777;background:#fff;border-radius:15px;border:1px dashed #ccc}
+
+@media(max-width:900px){
+ .searchTop{display:none}
+ .side{width:70px}
+ .nav{font-size:0;text-align:center}
+ .nav::first-letter{font-size:20px}
+ .content{padding:15px}
+}
+@media(max-width:600px){
+ .top{padding:0 10px}
+ .brand{font-size:18px}
+ .user b{display:none}
+ .side{width:58px;padding:10px 6px}
+ .nav{padding:12px 5px}
+ .topic{align-items:flex-start;flex-direction:column}
+ .topic>div:last-child{width:100%}
+ .topic .btn{margin-top:5px}
+ .row{flex-direction:column}
+}
+@media print{
+ .side,.top,.btn{display:none!important}
+ .content{max-width:none;padding:0}
+ .lessonbox{box-shadow:none}
+}
+</style>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+  import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut
+  } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAh7hRrCXveo-Lq3x5FDpwQubktz8AoiQo",
+    authDomain: "hedefim-a971c.firebaseapp.com",
+    projectId: "hedefim-a971c",
+    storageBucket: "hedefim-a971c.firebasestorage.app",
+    messagingSenderId: "308672669125",
+    appId: "1:308672669125:web:cc595692f2326080d7d7ac"
+  };
+
+  const firebaseApp = initializeApp(firebaseConfig);
+  const firebaseAuth = getAuth(firebaseApp);
+
+  window.firebaseAuth = firebaseAuth;
+  window.firebaseCreateUser = createUserWithEmailAndPassword;
+  window.firebaseSignIn = signInWithEmailAndPassword;
+  window.firebaseSignOut = signOut;
+</script>
+</head>
+
+<body>
+
+<div id="auth" class="auth">
+<div class="box">
+
+<div class="logo">
+ <span class="logoMark"></span>
+ HEDEF<span>İM</span>
+</div>
+
+<div class="tabs">
+<button id="lt" class="active" onclick="mode('login')">Giriş Yap</button>
+<button id="rt" onclick="mode('reg')">Kayıt Ol</button>
+</div>
+
+<div id="lf">
+<div class="field">
+<label>Kullanıcı adı</label>
+<input id="lu">
+</div>
+
+<div class="field">
+<label>Şifre</label>
+<input id="lp" type="password">
+</div>
+
+<button class="btn" style="width:100%" onclick="login()">Giriş Yap</button>
+<button class="btn gray" style="width:100%;margin-top:8px" onclick="forgot()">🔑 Şifremi Unuttum</button>
+</div>
+
+<div id="rf" class="hidden">
+<div class="field">
+<label>Öğrenci adı</label>
+<input id="rn">
+</div>
+
+<div class="field">
+<label>Kullanıcı adı</label>
+<input id="ru">
+</div>
+
+<div class="field">
+<label>Şifre</label>
+<input id="rp" type="password">
+</div>
+
+<div class="field">
+<label>Şifre tekrar</label>
+<input id="rp2" type="password">
+</div>
+<div class="field">
+<label>E-posta</label>
+<input id="re" type="email">
+</div>
+
+<div class="field">
+<label>HEDEFİM Davet Kodu</label>
+<input id="ric" type="text">
+</div>
+
+<button class="btn" style="width:100%" onclick="register()">Öğrenci Kaydı Oluştur</button>
+</div>
+
+</div>
+</div>
+
+<div id="app" class="app hidden">
+
+<header class="top">
+
+<div class="brand">
+<span class="logoMark" style="width:34px;height:34px;font-size:18px">H</span>
+HEDEF<span>İM</span>
+</div>
+
+<input id="globalSearch" class="searchTop" placeholder="🔎 Konu ara..." oninput="globalSearch(this.value)">
+
+<div class="user">
+<b id="uname"></b>
+<div id="ava" class="avatar"></div>
+<button class="btn gray" onclick="logout()">Çıkış</button>
+</div>
+
+</header>
+
+<div class="layout">
+
+<aside class="side">
+
+<button class="nav active" data-p="home" onclick="go('home')">🏠 Ana Sayfa</button>
+<button class="nav" data-p="lessons" onclick="go('lessons')">📚 Dersler</button>
+<button class="nav" data-p="progress" onclick="go('progress')">📊 Öğrenci Takibi</button>
+<button class="nav" data-p="messages" onclick="go('messages')">💬 Mesajlar</button>
+<button class="nav" data-p="live" onclick="go('live')">🎥 Canlı Ders</button>
+<button class="nav" data-p="together" onclick="go('together')">👥 Birlikte Öğrenelim</button>
+<button class="nav" data-p="ebrar" onclick="go('ebrar')">👩‍🏫 Ebrar</button>
+<button class="nav" data-p="help" onclick="go('help')">📝 Sınava Yardım</button>
+<button class="nav" data-p="surprises" onclick="go('surprises')">🎭 Sürprizler</button>
+<button class="nav" data-p="add" onclick="go('add')">➕ Yeni Konu</button>
+<button class="nav" data-p="profile" onclick="go('profile')">👤 Profil</button>
+
+</aside>
+
+<main id="c" class="content"></main>
+
+</div>
+</div>
+
+<div id="surpriseLayer">
+<div class="surprise">
+<div id="surpriseEmoji" class="surpriseEmoji">👀</div>
+<div id="surpriseText" class="surpriseText">Seni görüyorum heeeee!</div>
+<div id="surpriseSub" class="surpriseSub">Çalışmaya devam 😎</div>
+<button class="btn" onclick="closeSurprise()">Tamam 😄</button>
+</div>
+</div>
+
+<script>
+
+/* =========================================================
+   DERSLER
+========================================================= */
+
+const S=[
+
+['mat','📐','Matematik',[
+['Sayılar',['Sayılar','Üslü Sayılar','Köklü Sayılar','Aralık Kavramı','Sayı Kümeleri','Bölünebilme Kuralları','EBOB-EKOK','Asal Sayılar','Rasyonel Sayılar','Ondalık Gösterim','Basamak Kavramı','Mutlak Değer']],
+['Cebir',['Cebirsel İfadeler','Denklemler','Eşitsizlikler','Oran-Orantı','Problemler','Çarpanlara Ayırma','Özdeşlikler','Birinci Dereceden Denklemler','Birinci Dereceden Eşitsizlikler','Oran ve Orantı Problemleri','Sayı Problemleri','Yaş Problemleri','Hareket Problemleri','İşçi ve Havuz Problemleri','Kar-Zarar Problemleri']],
+['Fonksiyonlar',['Fonksiyonlar','Fonksiyon Kavramı','Fonksiyon Çeşitleri','Doğrusal Fonksiyonlar','Fonksiyon Dönüşümleri','Mutlak Değerli Fonksiyonlar','Nitel Özellikler','Karesel Fonksiyonlar','Kareköklü Fonksiyonlar','Rasyonel Fonksiyonlar','Ters Fonksiyonlar','Tanım ve Görüntü Kümeleri','Bileşke Fonksiyon','Fonksiyonlarda İşlemler','Parçalı Fonksiyonlar','Fonksiyon Grafikleri']],
+['Geometri',['Geometrik Şekiller','Eşlik ve Benzerlik','Tales','Öklid','Üçgende Yardımcı Elemanlar','Üçgende Alan','Üçgenler','Üçgende Açılar','Üçgende Kenar Bağıntıları','Dik Üçgen','Pisagor Bağıntısı','Özel Üçgenler','Dörtgenler','Paralelkenar','Yamuk','Deltoid']],
+['Trigonometri',['Sinüs-Kosinüs','Trigonometrik Oranlar','Özel Açılar','Trigonometrik Özdeşlikler','Birim Çember']],
+['Analitik Geometri',['Analitik Geometri','Noktanın Analitiği','Doğrunun Eğimi','Doğru Denklemi','İki Nokta Arasındaki Uzaklık','Doğruların Birbirine Göre Durumları']],
+['Veri ve Olasılık',['İstatistiksel Araştırma Süreci','İki Kategorik Değişkenli Problemler','Veriden Olasılığa','Koşullu Olasılık','Permütasyon','Kombinasyon','Veri Analizi','Aritmetik Ortalama','Medyan ve Mod','Açıklık','Permütasyon Problemleri','Kombinasyon Problemleri','Olasılık Problemleri']],
+['Algoritma ve Bilişim',['Algoritma ve Bilişim']]
+]],
+
+['fiz','⚡','Fizik',[
+['Fizik Bilimine Giriş',['Fizik Bilimine Giriş']],
+['Kuvvet ve Hareket I',['Kuvvet ve Hareket I','Vektörler','Hareket','Newton Hareket Yasaları','Bir Boyutta Hareket']],
+['Akışkanlar',['Akışkanlar']],
+['Enerji I',['Enerji I','İş','Enerji','Güç']],
+['Kuvvet ve Hareket II',['Kuvvet ve Hareket II']],
+['Enerji II',['Enerji II']],
+['Elektrik',['Elektrik','Elektrik Yükü','Elektrik Alan','Elektrik Akımı','Ohm Yasası']],
+['Dalgalar',['Dalgalar','Dalga Hareketi','Ses Dalgaları','Su Dalgaları']]
+]],
+
+['kim','🧪','Kimya',[
+['Etkileşim',['Etkileşim','Atomun Yapısı','Periyodik Sistem','Kimyasal Türler','Kimyasal Bağlar']],
+['Çeşitlilik',['Çeşitlilik','Maddenin Halleri','Karışımlar','Asitler ve Bazlar','Kimyasal Tepkimeler']],
+['Sürdürülebilirlik',['Sürdürülebilirlik','Kimya ve Çevre','Enerji Kaynakları']]
+]],
+
+['bio','🧬','Biyoloji',[
+['Yaşam',['Yaşam','Canlıların Ortak Özellikleri','Hücre','Hücre Zarından Madde Geçişleri']],
+['Organizasyon',['Organizasyon','Hücre Bölünmeleri','Kalıtım']],
+['Enerji',['Enerji','Canlılarda Enerji Dönüşümleri','Fotosentez']],
+['Ekoloji',['Ekoloji','Ekosistem','Besin Zinciri','Madde Döngüleri']]
+]],
+
+['edeb','📚','Türk Dili ve Edebiyatı',[
+['Temalar',['Sözün İnceliği','Anlam Arayışı','Anlamın Yapı Taşları','Dilin Zenginliği','Sözün Ezgisi','Kelimelerin Ritmi','Dünden Bugüne','Nesillerin Mirası']]
+]],
+
+['tarih','🏛️','Tarih',[
+['Konular',['Geçmişin İnşa Sürecinde Tarih','Eski Çağ Medeniyetleri','Orta Çağ Medeniyetleri','Türkistan’dan Türkiye’ye','Beylikten Devlete Osmanlı','Cihan Devleti Osmanlı']]
+]],
+
+['cog','🌍','Coğrafya',[
+['Konular',['Coğrafyanın Doğası','Mekânsal Bilgi Teknolojileri','Doğal Sistemler ve Süreçler','Beşerî Sistemler ve Süreçler','Ekonomik Faaliyetler ve Etkileri','Afetler ve Sürdürülebilir Çevre','Bölgeler, Ülkeler ve Küresel Bağlantılar']]
+]],
+
+['fel','🧠','Felsefe',[
+['Konular',['Felsefenin Doğası','Felsefe, Mantık ve Argümantasyon','Varlık Felsefesi','Bilgi Felsefesi','Ahlak Felsefesi','Estetik ve Sanat Felsefesi','Siyaset Felsefesi','Din Felsefesi','Bilim Felsefesi']]
+]],
+
+['din','🕌','Din Kültürü',[
+['Konular',['Allah-İnsan İlişkisi',"İslam'da İnanç Esasları","İslam'da İbadetler","İslam'da Ahlak İlkeleri",'Kur’an’a Göre Hz. Muhammed','İslam Medeniyeti ve Gönül Coğrafyamız']]
+]]
+
+];
+
+
+/* =========================================================
+   KONU İÇERİKLERİ
+========================================================= */
+
+const D={
+
+'Sayılar':{
+intro:'Sayılar; doğal, tam, rasyonel, irrasyonel ve gerçek sayılar gibi kümeler altında incelenir. Bir sayının hangi kümeye ait olduğunu bilmek birçok sorunun temelidir.',
+formula:'N ⊂ Z ⊂ Q ⊂ R. Rasyonel sayılar a/b biçiminde yazılabilir ve b ≠ 0 olmalıdır.',
+symbols:'N: doğal, Z: tam, Q: rasyonel, R: gerçek sayılar.',
+tip:'Bir sayıyı sınıflandırırken en dar uygun kümeyi düşün.',
+warning:'Her tam sayı rasyoneldir; fakat her gerçek sayı rasyonel değildir.',
+example:'Örnek: -3 sayısı tam sayıdır. -3 = -3/1 biçiminde yazılabildiği için aynı zamanda rasyoneldir.',
+practice:'Aşağıdakilerden hangisi irrasyoneldir? √2, 3/4, -5, 0. Cevap: √2.'
+},
+
+'Üslü Sayılar':{
+intro:'Üslü ifadeler, aynı sayının kendisiyle tekrar tekrar çarpılmasını kısa biçimde gösterir.',
+formula:'aᵐ·aⁿ=aᵐ⁺ⁿ | aᵐ/aⁿ=aᵐ⁻ⁿ | (aᵐ)ⁿ=aᵐⁿ | a⁰=1 (a≠0) | a⁻ⁿ=1/aⁿ.',
+symbols:'a: taban, n: üs.',
+tip:'Çarpma ve bölmede tabanların aynı olup olmadığına bak.',
+warning:'(a+b)² = a²+b² değildir. Üs parantezin tamamına uygulanır.',
+example:'2³·2² = 2⁵ = 32.',
+practice:'3²·3³ = 3⁵ = 243.'
+},
+
+'Köklü Sayılar':{
+intro:'Köklü ifadeler, bir sayının hangi sayının karesi veya daha genel kuvveti olduğunu ifade eder.',
+formula:'√ab=√a·√b. √a²=|a|. √12=2√3.',
+symbols:'√: karekök sembolü.',
+tip:'Kök içindeki tam kare çarpanları dışarı çıkar.',
+warning:'√a² sonucu |a| olur; doğrudan a yazmak her durumda doğru değildir.',
+example:'√48 = √(16·3) = 4√3.',
+practice:'√75 = √(25·3) = 5√3.'
+},
+
+'Aralık Kavramı':{
+intro:'Aralıklar, sayı doğrusunda belirli sayı kümelerini göstermenin kısa yoludur.',
+formula:'[a,b]: uçlar dahil. (a,b): uçlar hariç. [a,b): a dahil b hariç.',
+symbols:'[ ] dahil, ( ) hariç.',
+tip:'Köşeli parantez gördüğünde uç noktanın dahil olduğunu hatırla.',
+warning:'Sonsuzluk hiçbir zaman kapalı uçla yazılmaz.',
+example:'2 ≤ x < 5 eşitsizliği [2,5) aralığıdır.',
+practice:'-1 < x ≤ 4 için aralık (-1,4] olur.'
+},
+
+'Sayı Kümeleri':{
+intro:'Doğal, tam, rasyonel, irrasyonel ve gerçek sayılar birbirleriyle ilişkilidir.',
+formula:'N ⊂ Z ⊂ Q ⊂ R.',
+symbols:'N, Z, Q, R.',
+tip:'Kapsama ilişkisini sayı doğrusuyla düşün.',
+warning:'İrrasyonel sayılar Q kümesinin içinde değildir.',
+example:'5 doğal, tam, rasyonel ve gerçektir.',
+practice:'√2 gerçek sayıdır fakat rasyonel değildir.'
+},
+
+'Bölünebilme Kuralları':{
+intro:'Bölünebilme kuralları, bir sayının belirli sayılara kalansız bölünüp bölünmediğini hızlıca anlamayı sağlar.',
+formula:'2: son basamak çift. 3 ve 9: rakamlar toplamı. 5: son basamak 0 veya 5. 10: son basamak 0.',
+symbols:'Kalan 0 ise tam bölünme vardır.',
+tip:'Önce son basamağa, sonra rakamlar toplamına bak.',
+warning:'3 ve 9 kurallarını birbirine karıştırma.',
+example:'234 sayısının rakamları toplamı 9 olduğu için 3 ve 9 ile bölünür.',
+practice:'450 hem 2, hem 5, hem 9 hem de 10 ile bölünür.'
+},
+
+'EBOB-EKOK':{
+intro:'EBOB iki veya daha fazla sayının ortak bölenlerinin en büyüğüdür. EKOK ortak katların en küçüğüdür.',
+formula:'EBOB(a,b)·EKOK(a,b)=a·b.',
+symbols:'EBOB: en büyük ortak bölen. EKOK: en küçük ortak kat.',
+tip:'Bölen kelimesi EBOB, kat kelimesi EKOK için ipucudur.',
+warning:'Problemin bölüştürme mi yoksa tekrar buluşma mı istediğini belirle.',
+example:'12 ve 18 için EBOB=6, EKOK=36.',
+practice:'8 ve 12 için EBOB=4, EKOK=24.'
+},
+
+'Asal Sayılar':{
+intro:'Asal sayı, 1’den büyük ve yalnızca 1 ile kendisine bölünebilen doğal sayıdır.',
+formula:'2 tek çift asal sayıdır. 1 asal değildir.',
+symbols:'p asal sayıyı göstermek için kullanılabilir.',
+tip:'Bir sayının asal olup olmadığını kontrol ederken √n’e kadar bölenleri denemek yeterlidir.',
+warning:'1 asal sayı değildir.',
+example:'17 yalnızca 1 ve 17’ye bölündüğü için asaldır.',
+practice:'21 asal değildir; 3×7 şeklinde yazılır.'
+},
+
+'Rasyonel Sayılar':{
+intro:'Rasyonel sayılar a/b biçiminde yazılabilen sayılardır; b sıfır olamaz.',
+formula:'a/b, b≠0.',
+symbols:'Q rasyonel sayılar kümesidir.',
+tip:'Ondalık gösterim sonlu veya devirliyse rasyoneldir.',
+warning:'Paydanın sıfır olamayacağını unutma.',
+example:'0,75 = 75/100 = 3/4.',
+practice:'0,333... = 1/3 rasyoneldir.'
+},
+
+'Ondalık Gösterim':{
+intro:'Kesirler bölme işlemiyle ondalık gösterime çevrilebilir.',
+formula:'a/b kesrinde payı paydaya böl.',
+symbols:', ondalık ayırıcıdır.',
+tip:'Sonlu ve devirli ondalıklar rasyoneldir.',
+warning:'Devirli kısmı doğru belirle.',
+example:'3/4 = 0,75.',
+practice:'1/8 = 0,125.'
+},
+
+'Basamak Kavramı':{
+intro:'Bir doğal sayının rakamlarının bulunduğu konumlara basamak denir.',
+formula:'Birler, onlar, yüzler, binler... Basamak değeri = rakam × basamak değeri.',
+symbols:'Rakam 0–9 arasındadır.',
+tip:'Sayı değeri ile basamak değerini ayır.',
+warning:'Rakam ile basamak aynı şey değildir.',
+example:'582 sayısında 8’in basamak değeri 80’dir.',
+practice:'704 sayısında 7’nin basamak değeri 700’dür.'
+},
+
+'Mutlak Değer':{
+intro:'Mutlak değer, bir sayının sıfıra olan uzaklığıdır.',
+formula:'|x|=x (x≥0), |x|=-x (x<0).',
+symbols:'|x| mutlak değer.',
+tip:'Mutlak değerin sonucu negatif olamaz.',
+warning:'İçerideki sayı negatifse işaret değişir.',
+example:'|-7|=7 ve |5|=5.',
+practice:'|3-8|=|-5|=5.'
+},
+
+'Cebirsel İfadeler':{
+intro:'Cebirsel ifadeler sayı, değişken ve işlemlerden oluşur. Benzer terimler birleştirilebilir.',
+formula:'3x+2x=5x.',
+symbols:'x,y değişken; katsayı değişkenin önündeki sayıdır.',
+tip:'Yalnızca benzer terimleri topla.',
+warning:'3x ile 3x² benzer terim değildir.',
+example:'4x+3-2x+5=2x+8.',
+practice:'7a-2a+4=5a+4.'
+},
+
+'Denklemler':{
+intro:'Denklem, bilinmeyen içeren eşitliktir. Amaç bilinmeyenin değerini bulmaktır.',
+formula:'Eşitliğin iki tarafına aynı işlem uygulanabilir.',
+symbols:'x bilinmeyen olabilir.',
+tip:'Bilinmeyeni yalnız bırak.',
+warning:'Bir terimi diğer tarafa geçirirken işaret değişimini unutma.',
+example:'2x+4=10 → 2x=6 → x=3.',
+practice:'3x-6=9 → x=5.'
+},
+
+'Eşitsizlikler':{
+intro:'Eşitsizlikler iki ifadenin büyüklük ilişkisini gösterir.',
+formula:'Negatif sayı ile çarpma veya bölmede eşitsizlik yönü değişir.',
+symbols:'<, >, ≤, ≥.',
+tip:'Son işlem negatifle bölmeyse yönü çevir.',
+warning:'Pozitif sayıyla işlemde yön değişmez.',
+example:'-2x>6 → x<-3.',
+practice:'3x+1≤10 → x≤3.'
+},
+
+'Oran-Orantı':{
+intro:'Oran iki çokluğun karşılaştırılmasıdır. Orantıda iki oran birbirine eşittir.',
+formula:'a/b=c/d ise ad=bc.',
+symbols:'a:b oranı.',
+tip:'Çapraz çarpım özellikle basit orantılarda hızlıdır.',
+warning:'Aynı türden büyüklükleri karşılaştır.',
+example:'2/5=x/20 → 5x=40 → x=8.',
+practice:'3/4=x/12 → x=9.'
+},
+
+'Problemler':{
+intro:'Problemlerde verilenleri matematiksel ifadeye dönüştürmek temel adımdır.',
+formula:'Verilen → bilinmeyen → denklem → çözüm → kontrol.',
+symbols:'x bilinmeyen olarak seçilebilir.',
+tip:'Soruda isteneni önce belirle.',
+warning:'Sayıları doğrudan işleme sokmadan ilişkinin ne olduğunu anla.',
+example:'Bir sayının 3 fazlası 10 ise x+3=10 ve x=7.',
+practice:'Bir sayının iki katı 18 ise sayı 9’dur.'
+},
+
+'Çarpanlara Ayırma':{
+intro:'Bir cebirsel ifadeyi çarpım biçiminde yazmaya çarpanlara ayırma denir.',
+formula:'ax+ay=a(x+y).',
+symbols:'Ortak çarpan parantez dışına alınır.',
+tip:'Önce tüm terimlerde ortak çarpan var mı bak.',
+warning:'İşaretleri kontrol et.',
+example:'6x+9=3(2x+3).',
+practice:'4x²+8x=4x(x+2).'
+},
+
+'Özdeşlikler':{
+intro:'Özdeşlik, değişkenlerin tüm uygun değerlerinde doğru olan eşitliktir.',
+formula:'(a+b)²=a²+2ab+b²; (a-b)²=a²-2ab+b²; a²-b²=(a-b)(a+b).',
+symbols:'a,b değişkenler.',
+tip:'Kare açılımında ortadaki 2ab terimini unutma.',
+warning:'(a-b)² ifadesinde son terim pozitiftir.',
+example:'(x+2)²=x²+4x+4.',
+practice:'x²-9=(x-3)(x+3).'
+},
+
+'Fonksiyonlar':{
+intro:'Fonksiyon, tanım kümesindeki her elemanı değer kümesinde yalnız bir elemana eşleyen bağıntıdır.',
+formula:'f:A→B. Her x için tek bir f(x) vardır.',
+symbols:'A tanım kümesi, B değer kümesi.',
+tip:'Bir girdiden iki farklı çıktı çıkıyorsa fonksiyon değildir.',
+warning:'Her bağıntı fonksiyon değildir.',
+example:'f(x)=2x+1 için f(3)=7.',
+practice:'f(x)=x² ise f(-2)=4.'
+},
+
+'Fonksiyon Kavramı':{
+intro:'Fonksiyonda her girişin tam olarak bir çıkışı vardır.',
+formula:'x₁=x₂ ise f(x₁)=f(x₂).',
+symbols:'f(x) görüntüyü gösterir.',
+tip:'Ok şemasında her soldaki elemandan yalnız bir ok çıkmalıdır.',
+warning:'Aynı hedefe birden fazla okun gitmesi fonksiyona engel değildir.',
+example:'1→3, 2→3, 3→5 bir fonksiyon olabilir.',
+practice:'1→2 ve 1→4 varsa fonksiyon değildir.'
+},
+
+'Fonksiyon Çeşitleri':{
+intro:'Fonksiyonlar bire bir, örten, içine, sabit ve birim gibi farklı özelliklere sahip olabilir.',
+formula:'Bire bir: farklı girdiler farklı çıktılara gider. Örten: değer kümesinde açıkta eleman kalmaz.',
+symbols:'Bire bir = injective, örten = surjective.',
+tip:'Bire bir için tekrar eden görüntülere, örten için boşta kalan hedeflere bak.',
+warning:'Bire bir ve örten aynı kavram değildir.',
+example:'f(x)=2x doğrusal ve bire birdir.',
+practice:'Sabit fonksiyon genellikle bire bir değildir.'
+},
+
+'Doğrusal Fonksiyonlar':{
+intro:'Doğrusal fonksiyonlar f(x)=ax+b biçiminde ifade edilir.',
+formula:'f(x)=ax+b. a eğim, b y-kesişimidir.',
+symbols:'a:eğim, b:y eksenini kestiği değer.',
+tip:'a>0 ise artan, a<0 ise azalan.',
+warning:'Eğimi hesaplarken Δy/Δx kullan.',
+example:'f(x)=3x-2 için eğim 3, y-kesişimi -2’dir.',
+practice:'f(x)=-2x+5 azalandır.'
+},
+
+'Fonksiyon Dönüşümleri':{
+intro:'Fonksiyon grafiğinde sağa-sola, yukarı-aşağı öteleme ve yansıma gibi dönüşümler yapılabilir.',
+formula:'f(x)+k: yukarı k. f(x-k): sağa k.',
+symbols:'k dönüşüm miktarıdır.',
+tip:'Parantezin dışındaki değişiklik ile içindeki değişikliği ayır.',
+warning:'f(x-k) grafiği sağa kaydırır.',
+example:'y=x²+3, y=x² grafiğinin 3 birim yukarısıdır.',
+practice:'y=(x-2)² grafiği 2 birim sağa kaymıştır.'
+},
+
+'Mutlak Değerli Fonksiyonlar':{
+intro:'Mutlak değer fonksiyonları sayı doğrusundaki uzaklık fikrine dayanır.',
+formula:'|x|=x, x≥0; |x|=-x, x<0.',
+symbols:'| | mutlak değer.',
+tip:'Kırılma noktalarını belirleyip parçalı düşün.',
+warning:'Mutlak değer sonucu negatif olamaz.',
+example:'|x-3|=2 → x=1 veya x=5.',
+practice:'|x|=4 → x=±4.'
+},
+
+'Nitel Özellikler':{
+intro:'Bir fonksiyonun artan-azalan olması, maksimum-minimum noktaları ve simetri gibi grafik özellikleri incelenebilir.',
+formula:'Grafik soldan sağa yükseliyorsa artan, düşüyorsa azalan kabul edilir.',
+symbols:'x yatay, y dikey eksendir.',
+tip:'Grafiği soldan sağa oku.',
+warning:'Bir noktadaki yüksekliği fonksiyonun tüm davranışı sanma.',
+example:'Parabolün tepe noktasından önce azalıp sonra artması mümkündür.',
+practice:'Grafik soldan sağa sürekli yükseliyorsa artandır.'
+},
+
+'Karesel Fonksiyonlar':{
+intro:'Karesel fonksiyonlar genellikle f(x)=ax²+bx+c biçimindedir ve grafikleri paraboldür.',
+formula:'Tepe noktası x=-b/(2a).',
+symbols:'a,b,c katsayılar.',
+tip:'a>0 ise kollar yukarı, a<0 ise aşağı.',
+warning:'a katsayısının işaretini kontrol et.',
+example:'f(x)=x²-4x+3 için tepe x=2’dir.',
+practice:'y=-x² parabolünün kolları aşağıdır.'
+},
+
+'Kareköklü Fonksiyonlar':{
+intro:'Kareköklü fonksiyonlarda kök içinin tanımlı olması gerekir.',
+formula:'f(x)=√x için x≥0.',
+symbols:'√x.',
+tip:'Tanım kümesi için kök içini ≥0 yap.',
+warning:'Gerçek sayılarda negatif sayının karekökü yoktur.',
+example:'√(x-2) için x≥2.',
+practice:'√(3x+6) için x≥-2.'
+},
+
+'Rasyonel Fonksiyonlar':{
+intro:'Rasyonel fonksiyonlarda değişken payda içerisinde bulunabilir.',
+formula:'f(x)=P(x)/Q(x), Q(x)≠0.',
+symbols:'Q(x) payda polinomudur.',
+tip:'Tanım kümesinde paydayı sıfır yapan değerleri çıkar.',
+warning:'Payda sıfır olamaz.',
+example:'f(x)=1/(x-2) için x≠2.',
+practice:'1/(x+3) için x≠-3.'
+},
+
+'Ters Fonksiyonlar':{
+intro:'Ters fonksiyon, bir fonksiyonun yaptığı eşlemeyi geri çevirir.',
+formula:'f⁻¹(f(x))=x.',
+symbols:'f⁻¹ ters fonksiyondur.',
+tip:'x ve y’yi değiştirip y’yi yalnız bırak.',
+warning:'Her fonksiyonun ters fonksiyonu yoktur; uygun koşullar gerekir.',
+example:'f(x)=2x+4 → y=2x+4 → x=(y-4)/2 → f⁻¹(x)=(x-4)/2.',
+practice:'f(x)=x+5 ise f⁻¹(x)=x-5.'
+},
+
+'Tanım ve Görüntü Kümeleri':{
+intro:'Tanım kümesi fonksiyona girebilen x değerlerini, görüntü kümesi elde edilen y değerlerini ifade eder.',
+formula:'x değerleri → tanım; f(x) değerleri → görüntü.',
+symbols:'Dom(f), Im(f).',
+tip:'Grafikte tanım için x eksenine, görüntü için y eksenine bak.',
+warning:'Tanım ve görüntüyü ters yazma.',
+example:'f(x)=x² için R üzerinde tanım kümesi R, görüntü kümesi [0,∞).',
+practice:'√x fonksiyonunda tanım kümesi [0,∞).'
+},
+
+'Bileşke Fonksiyon':{
+intro:'Bir fonksiyonun çıktısını başka bir fonksiyonun girdisi olarak kullanmaya bileşke denir.',
+formula:'(f∘g)(x)=f(g(x)).',
+symbols:'∘ bileşke.',
+tip:'Sağdaki fonksiyonu önce uygula.',
+warning:'f∘g ile g∘f genellikle aynı değildir.',
+example:'f(x)=x+1, g(x)=2x ise f(g(x))=2x+1.',
+practice:'f(x)=x², g(x)=x+1 → f(g(x))=(x+1)².'
+},
+
+'Fonksiyonlarda İşlemler':{
+intro:'Fonksiyonlar üzerinde toplama, çıkarma, çarpma ve bölme işlemleri yapılabilir.',
+formula:'(f+g)(x)=f(x)+g(x).',
+symbols:'f+g, f-g, fg.',
+tip:'Önce her fonksiyonun x için değerini yaz.',
+warning:'Bölmede payda fonksiyonun sıfır olduğu değerleri dışarıda bırak.',
+example:'f=x+1, g=x → f+g=2x+1.',
+practice:'f=2x, g=3x → f+g=5x.'
+},
+
+'Parçalı Fonksiyonlar':{
+intro:'Tanım kümesinin farklı aralıklarında farklı kurallar kullanan fonksiyonlara parçalı fonksiyon denir.',
+formula:'Her aralık için verilen kural ayrı uygulanır.',
+symbols:'x<a, x≥a gibi koşullar.',
+tip:'Önce x’in hangi aralıkta olduğunu belirle.',
+warning:'Yanlış parçanın formülünü kullanma.',
+example:'f(x)=x+1, x<0; f(x)=x², x≥0. f(2)=4.',
+practice:'x=-1 için ilk parça kullanılır.'
+},
+
+'Fonksiyon Grafikleri':{
+intro:'Fonksiyon grafikleri x ve y arasındaki ilişkiyi görsel olarak gösterir.',
+formula:'Grafikte her dikey doğru en fazla bir noktada kesiyorsa fonksiyon olabilir.',
+symbols:'x,y eksenleri.',
+tip:'Dikey doğru testini kullan.',
+warning:'Grafiğin her noktası tanım kümesine dahil olmayabilir.',
+example:'y=x² paraboli bir fonksiyon grafiğidir.',
+practice:'Daire grafiği genel olarak fonksiyon değildir.'
+},
+
+'Geometrik Şekiller':{
+intro:'Temel geometrik şekiller; üçgen, dörtgen, çember ve çokgenlerdir.',
+formula:'Dikdörtgen alanı=a·b. Üçgen alanı=taban·yükseklik/2.',
+symbols:'Alan=S, çevre=Ç.',
+tip:'Alan ile çevreyi ayır.',
+warning:'Yüksekliğin tabana dik olması gerekir.',
+example:'Tabanı 8, yüksekliği 5 olan üçgenin alanı 20’dir.',
+practice:'4×6 dikdörtgenin alanı 24’tür.'
+},
+
+'Eşlik ve Benzerlik':{
+intro:'Eş şekillerin karşılık gelen uzunluk ve açıları aynıdır. Benzer şekillerde karşılık gelen kenarlar orantılıdır.',
+formula:'Benzerlik oranı k ise alan oranı k² olur.',
+symbols:'k benzerlik oranıdır.',
+tip:'Önce karşılık gelen köşe ve kenarları eşleştir.',
+warning:'Çevre oranı k, alan oranı k² olur.',
+example:'Kenarları 2 ve 6 olan benzer şekillerde k=3 ise alan oranı 9’dur.',
+practice:'k=2 olan benzer şekillerin alan oranı 4’tür.'
+},
+
+'Tales':{
+intro:'Tales teoremi, paralel doğruların oluşturduğu kesen parçalar arasında orantı kurulmasını sağlar.',
+formula:'Paraleller kesenleri orantılı böler.',
+symbols:'Orantı bağıntıları.',
+tip:'Karşılık gelen parçaları eşleştir.',
+warning:'Parçaları rastgele eşleştirme.',
+example:'Benzer üçgen oluşuyorsa karşılık gelen kenarlar orantılıdır.',
+practice:'Bir kenar 3’ten 6’ya çıkıyorsa ölçek 2’dir.'
+},
+
+'Öklid':{
+intro:'Dik üçgende hipotenüse indirilen dikme ile kenarlar arasında Öklid bağıntıları kurulabilir.',
+formula:'h²=p·q; a²=c·p; b²=c·q.',
+symbols:'c hipotenüs, p ve q hipotenüs parçaları.',
+tip:'Şekli çizmeden formülü ezberden uygulama.',
+warning:'Hangi parçanın hangi kenara ait olduğunu kontrol et.',
+example:'Hipotenüs parçaları 4 ve 9 ise yükseklik 6’dır.',
+practice:'h²=4·9 → h=6.'
+},
+
+'Üçgende Yardımcı Elemanlar':{
+intro:'Üçgende açıortay, kenarortay, yükseklik ve orta dikme önemli yardımcı elemanlardır.',
+formula:'Kenarortay karşı kenarı iki eş parçaya böler.',
+symbols:'h: yükseklik, m: kenarortay.',
+tip:'Elemanın hangi özelliği sağladığını sor.',
+warning:'Kenarortay ile açıortayı karıştırma.',
+example:'Bir kenarortay karşı kenarı iki eş parçaya böler.',
+practice:'Açıortay karşı açıyı iki eş açıya böler.'
+},
+
+'Üçgende Alan':{
+intro:'Üçgen alanı taban ve o tabana ait yükseklikle bulunur.',
+formula:'Alan=taban×yükseklik/2.',
+symbols:'S alan.',
+tip:'Yükseklik tabana dik olmalıdır.',
+warning:'Yan kenarı doğrudan yükseklik sanma.',
+example:'Taban 10, yükseklik 6 → alan 30.',
+practice:'Taban 12, yükseklik 4 → alan 24.'
+},
+
+'Üçgenler':{
+intro:'Üçgen üç kenarlı çokgendir ve iç açıları toplamı 180°dir.',
+formula:'A+B+C=180°.',
+symbols:'A,B,C açılar.',
+tip:'Önce bilinen açıları topla.',
+warning:'Dış açı ilişkilerini iç açı toplamıyla karıştırma.',
+example:'50° ve 60° verilen üçgende üçüncü açı 70°dir.',
+practice:'90° ve 35° → üçüncü açı 55°.'
+},
+
+'Üçgende Açılar':{
+intro:'Üçgenin iç açıları toplamı 180°dir. Dış açı, kendisine komşu olmayan iki iç açının toplamına eşittir.',
+formula:'İç açılar toplamı 180°. Dış açı = uzak iki iç açının toplamı.',
+symbols:'° derece.',
+tip:'Önce 180° toplamını kullan.',
+warning:'Dış açının komşu iç açıyla toplamı 180°dir.',
+example:'İki iç açı 40° ve 70° ise üçüncü açı 70°dir.',
+practice:'Dış açı 120°, uzak iç açılardan biri 50° ise diğeri 70°dir.'
+},
+
+'Dik Üçgen':{
+intro:'Bir açısı 90° olan üçgene dik üçgen denir.',
+formula:'Pisagor: a²+b²=c².',
+symbols:'c hipotenüstür.',
+tip:'90°nin karşısındaki kenar hipotenüstür.',
+warning:'Hipotenüs her zaman en uzun kenardır.',
+example:'3-4-5 üçgeninde hipotenüs 5’tir.',
+practice:'6-8-10 da dik üçgendir.'
+},
+
+'Pisagor Bağıntısı':{
+intro:'Dik üçgende dik kenarların kareleri toplamı hipotenüsün karesine eşittir.',
+formula:'a²+b²=c².',
+symbols:'a,b dik kenarlar; c hipotenüs.',
+tip:'Önce hipotenüsü belirle.',
+warning:'Pisagor yalnız dik üçgende kullanılır.',
+example:'a=6,b=8 → c=10.',
+practice:'a=5,b=12 → c=13.'
+},
+
+'Özel Üçgenler':{
+intro:'Bazı dik üçgen oranları soruları hızlandırır.',
+formula:'3-4-5, 5-12-13, 8-15-17 ve 45-45-90 oranı 1-1-√2.',
+symbols:'√2, √3 gibi köklü oranlar.',
+tip:'Sayıları ortak katsayıyla büyütüp küçült.',
+warning:'Oranların hangi kenara ait olduğunu kontrol et.',
+example:'6-8-10, 3-4-5’in 2 katıdır.',
+practice:'9-12-15 bir 3-4-5 üçgenidir.'
+},
+
+'Dörtgenler':{
+intro:'Dörtgenlerin dört kenarı vardır ve iç açıları toplamı 360°dir.',
+formula:'İç açılar toplamı 360°.',
+symbols:'S alan, Ç çevre.',
+tip:'Özel dörtgen özelliklerini ayrı öğren.',
+warning:'Köşegen özelliklerini karıştırma.',
+example:'Bir dikdörtgenin tüm açıları 90°dir.',
+practice:'Üç açı 80°,90°,100° ise dördüncü 90°dir.'
+},
+
+'Paralelkenar':{
+intro:'Karşılıklı kenarları paralel olan dörtgendir.',
+formula:'Alan=taban×yükseklik. Karşılıklı açılar eşittir.',
+symbols:'h yükseklik.',
+tip:'Yükseklik tabana dik uzaklıktır.',
+warning:'Yan kenarı yükseklik sanma.',
+example:'Taban 7, yükseklik 4 → alan 28.',
+practice:'Karşılıklı kenarlar eşittir.'
+},
+
+'Yamuk':{
+intro:'En az bir çift karşılıklı kenarı paralel olan dörtgendir.',
+formula:'Alan=(alt taban+üst taban)×yükseklik/2.',
+symbols:'a,b tabanlar.',
+tip:'İki paralel kenarı taban olarak belirle.',
+warning:'Yan kenarlar taban değildir.',
+example:'Tabanlar 6 ve 10, yükseklik 4 → alan 32.',
+practice:'Tabanlar 5 ve 9, h=6 → alan 42.'
+},
+
+'Deltoid':{
+intro:'İki çift komşu kenarı eşit olan dörtgene deltoid denir.',
+formula:'Alan=köşegenler çarpımının yarısı.',
+symbols:'d₁,d₂ köşegenler.',
+tip:'Alan sorularında köşegenleri kullan.',
+warning:'Köşegenlerin hangi uzunluklar olduğunu kontrol et.',
+example:'Köşegenler 6 ve 8 → alan 24.',
+practice:'10 ve 4 → alan 20.'
+},
+
+'Sinüs-Kosinüs':{
+intro:'Dik üçgende trigonometrik oranlar açı ile kenarlar arasındaki ilişkiyi kurar.',
+formula:'sinθ=karşı/hipotenüs; cosθ=komşu/hipotenüs; tanθ=karşı/komşu.',
+symbols:'sin, cos, tan.',
+tip:'Açıyı belirledikten sonra karşı ve komşuyu seç.',
+warning:'Hipotenüs her zaman 90°nin karşısındadır.',
+example:'Karşı 3, hipotenüs 5 ise sinθ=3/5.',
+practice:'Komşu 4, hipotenüs 5 ise cosθ=4/5.'
+},
+
+'Trigonometrik Oranlar':{
+intro:'Sinüs, kosinüs ve tanjant temel trigonometrik oranlardır.',
+formula:'tanθ=sinθ/cosθ.',
+symbols:'sinθ, cosθ, tanθ.',
+tip:'Önce dik üçgeni veya birim çemberi düşün.',
+warning:'Tanjantın pay ve paydasını karıştırma.',
+example:'sinθ=3/5 ve cosθ=4/5 ise tanθ=3/4.',
+practice:'sin=1/2, cos=√3/2 → tan=1/√3.'
+},
+
+'Özel Açılar':{
+intro:'30°,45°,60° gibi özel açılarda trigonometrik değerler sık kullanılır.',
+formula:'sin30=1/2, cos60=1/2, sin45=cos45=√2/2, sin60=cos30=√3/2.',
+symbols:'° derece.',
+tip:'30-60-90 ve 45-45-90 üçgenlerini hatırla.',
+warning:'Sinüs ve kosinüs değerlerini açıyla birlikte düşün.',
+example:'sin30°=1/2.',
+practice:'cos60°=1/2.'
+},
+
+'Trigonometrik Özdeşlikler':{
+intro:'Trigonometrik ifadeleri sadeleştirmeye yarayan temel eşitliklerdir.',
+formula:'sin²x+cos²x=1; tanx=sinx/cosx.',
+symbols:'x açı.',
+tip:'Karmaşık ifadeyi sin ve cos cinsinden yazmak işe yarar.',
+warning:'Karesini almayı unutma.',
+example:'sin²x=1-cos²x.',
+practice:'cos²x=1-sin²x.'
+},
+
+'Birim Çember':{
+intro:'Merkezi orijin, yarıçapı 1 olan çember trigonometrik değerlerin işaretlerini ve koordinatlarını göstermede kullanılır.',
+formula:'Noktadaki x=cosθ, y=sinθ.',
+symbols:'r=1.',
+tip:'Bölgelerde sin ve cos işaretlerini kontrol et.',
+warning:'Açının hangi bölgede olduğunu belirle.',
+example:'0° noktasında koordinat (1,0), dolayısıyla cos0=1 ve sin0=0.',
+practice:'90° noktasında (0,1).'
+},
+
+'Analitik Geometri':{
+intro:'Geometriyi koordinat düzlemi ve cebirsel denklemlerle inceleyen alandır.',
+formula:'Nokta (x,y) biçiminde gösterilir.',
+symbols:'x yatay, y dikey eksendir.',
+tip:'Koordinatların sırasını karıştırma.',
+warning:'(x,y) ile (y,x) aynı nokta değildir.',
+example:'A(2,3) noktasında x=2,y=3.',
+practice:'B(-1,4) noktasında y=4.'
+},
+
+'Noktanın Analitiği':{
+intro:'Noktalar koordinat düzleminde sıralı ikililerle gösterilir.',
+formula:'A(x₁,y₁).',
+symbols:'x apsis, y ordinat.',
+tip:'Önce x sonra y yaz.',
+warning:'Eksenleri ters okuma.',
+example:'A(3,-2) üçüncü değil dördüncü bölgededir.',
+practice:'(-2,3) ikinci bölgededir.'
+},
+
+'Doğrunun Eğimi':{
+intro:'Bir doğrunun eğimi, y değişiminin x değişimine oranıdır.',
+formula:'m=(y₂-y₁)/(x₂-x₁).',
+symbols:'m eğim.',
+tip:'İki noktayı doğru sırayla yerine koy.',
+warning:'x₂-x₁ sıfırsa doğru düşeydir ve eğimi tanımsızdır.',
+example:'(1,2),(3,6) için m=4/2=2.',
+practice:'(0,1),(2,5) için m=2.'
+},
+
+'Doğru Denklemi':{
+intro:'Bir doğrunun denklemi eğim ve bir nokta yardımıyla yazılabilir.',
+formula:'y-y₁=m(x-x₁).',
+symbols:'m eğim.',
+tip:'Noktayı denklemde yerine koyarak kontrol et.',
+warning:'İşaretleri dikkatle taşı.',
+example:'m=2 ve (1,3): y-3=2(x-1).',
+practice:'m=1,(0,2) → y=x+2.'
+},
+
+'İki Nokta Arasındaki Uzaklık':{
+intro:'Koordinat düzleminde iki nokta arasındaki uzaklık Pisagor bağıntısından elde edilir.',
+formula:'d=√[(x₂-x₁)²+(y₂-y₁)²].',
+symbols:'d uzaklık.',
+tip:'Önce x ve y farklarını bul.',
+warning:'Farkların işareti kare alındığında sorun oluşturmaz.',
+example:'(0,0) ile (3,4) arası 5’tir.',
+practice:'(1,1),(4,5) → 5.'
+},
+
+'Doğruların Birbirine Göre Durumları':{
+intro:'İki doğru paralel, kesişen veya çakışık olabilir.',
+formula:'Eşit eğimler paralellik için temel göstergedir.',
+symbols:'m₁,m₂ eğimler.',
+tip:'Önce eğimleri karşılaştır.',
+warning:'Düşey doğruların eğimi tanımsızdır.',
+example:'m₁=2,m₂=2 olan farklı doğrular paraleldir.',
+practice:'m₁=1,m₂=-1 ise kesişir.'
+},
+
+'Aritmetik Ortalama':{
+intro:'Verilerin toplamının veri sayısına bölünmesiyle bulunur.',
+formula:'Ortalama=toplam/veri sayısı.',
+symbols:'x̄.',
+tip:'Toplamı ve eleman sayısını ayrı hesapla.',
+warning:'Frekans varsa frekansla çarpmayı unutma.',
+example:'2,4,6 ortalaması 4’tür.',
+practice:'3,5,7,9 ortalaması 6’dır.'
+},
+
+'Medyan ve Mod':{
+intro:'Medyan sıralı verinin ortanca değeridir. Mod en sık tekrar eden değerdir.',
+formula:'Çift sayıda veride medyan ortadaki iki değerin ortalamasıdır.',
+symbols:'Medyan, mod.',
+tip:'Medyan bulmadan önce sırala.',
+warning:'Sıralamadan ortanca bulma.',
+example:'1,3,4,8,9 medyan 4’tür.',
+practice:'2,2,3,4 mod 2’dir.'
+},
+
+'Açıklık':{
+intro:'Bir veri grubundaki en büyük ve en küçük değer arasındaki farktır.',
+formula:'Açıklık=max-min.',
+symbols:'R.',
+tip:'Sadece en büyük ve en küçük değerlere bak.',
+warning:'Ortalama ile açıklığı karıştırma.',
+example:'2,5,9 açıklık 7.',
+practice:'1,4,10 → açıklık 9.'
+},
+
+'Permütasyon':{
+intro:'Elemanların sıralanışını dikkate alan seçimlere permütasyon denir.',
+formula:'nPr=n!/(n-r)!.',
+symbols:'n!, faktöriyel.',
+tip:'Sıralama önemliyse permütasyonu düşün.',
+warning:'Sıralamanın önemli olup olmadığını belirle.',
+example:'3 kişinin sıralanması 3!=6.',
+practice:'4 kişinin sıralanması 24.'
+},
+
+'Kombinasyon':{
+intro:'Sıralamanın önemli olmadığı seçimlere kombinasyon denir.',
+formula:'nCr=n!/[r!(n-r)!].',
+symbols:'C(n,r).',
+tip:'Komite/seçim kelimeleri kombinasyona işaret edebilir.',
+warning:'Sıralama varsa kombinasyon tek başına yeterli değildir.',
+example:'5 kişiden 2 kişi seçme: C(5,2)=10.',
+practice:'4 kişiden 2 seçim = 6.'
+},
+
+'Olasılık Problemleri':{
+intro:'Bir olayın gerçekleşme olasılığı uygun durumların tüm durumlara oranıyla bulunabilir.',
+formula:'P(A)=uygun durum/tüm durumlar.',
+symbols:'P(A).',
+tip:'Önce örnek uzayı belirle.',
+warning:'Tüm durumların eş olasılıklı olup olmadığını kontrol et.',
+example:'Adil zarla 6 gelme olasılığı 1/6.',
+practice:'Çift sayı gelme olasılığı 3/6=1/2.'
+},
+
+'Koşullu Olasılık':{
+intro:'Bir olayın başka bir olay gerçekleşmişken olma olasılığıdır.',
+formula:'P(A|B)=P(A∩B)/P(B).',
+symbols:'| koşullu olasılık.',
+tip:'Verilen koşulu paydada düşün.',
+warning:'P(A|B) ile P(B|A) aynı değildir.',
+example:'B koşulu altında uygun durum sayısını yeniden belirle.',
+practice:'Koşullu olasılıkta örnek uzay daralabilir.'
+},
+
+'İstatistiksel Araştırma Süreci':{
+intro:'İstatistiksel araştırma problem belirleme, veri toplama, analiz ve yorumlama aşamalarından oluşur.',
+formula:'Problem → veri → analiz → yorum.',
+symbols:'Veri, örneklem, değişken.',
+tip:'Araştırma sorusunun ölçülebilir olmasına dikkat et.',
+warning:'Veriden çıkarılamayacak sonuçlar üretme.',
+example:'Öğrencilerin günlük çalışma süresini araştırmak için veri toplanabilir.',
+practice:'Anket sonuçları tablo ve grafikle analiz edilebilir.'
+},
+
+'İki Kategorik Değişkenli Problemler':{
+intro:'İki kategorik değişken arasındaki ilişki çapraz tablolarla incelenebilir.',
+formula:'Satır ve sütun frekansları karşılaştırılır.',
+symbols:'Frekans, yüzde.',
+tip:'Yüzdeyi hangi toplam üzerinden aldığını belirt.',
+warning:'Birliktelik nedensellik anlamına gelmez.',
+example:'Spor yapma ile uyku düzeni kategorileri karşılaştırılabilir.',
+practice:'Çapraz tablo iki kategorik değişkeni birlikte gösterir.'
+},
+
+'Veriden Olasılığa':{
+intro:'Verilerden elde edilen oranlar olasılık tahminlerinde kullanılabilir.',
+formula:'Göreli sıklık = frekans/toplam.',
+symbols:'Göreli sıklık.',
+tip:'Frekansı toplam gözleme böl.',
+warning:'Tahmini olasılık ile teorik olasılığı ayır.',
+example:'100 denemede 25 başarı varsa göreli sıklık 0,25’tir.',
+practice:'200 denemede 80 olay → 0,4.'
+},
+
+'Veri Analizi':{
+intro:'Veri analizi tablo, grafik ve merkezi eğilim ölçüleriyle veriyi anlamlandırır.',
+formula:'Ortalama, medyan, mod, açıklık gibi ölçüler kullanılır.',
+symbols:'Grafik, frekans.',
+tip:'Grafiğin eksenlerini ve birimlerini oku.',
+warning:'Grafik ölçeğinin yanıltıcı olup olmadığını kontrol et.',
+example:'Sütun grafiğinde en uzun sütun en yüksek frekansı gösterir.',
+practice:'Veriyi yorumlamadan önce toplamı kontrol et.'
+},
+
+'Algoritma ve Bilişim':{
+intro:'Algoritma bir problemi çözmek için izlenen sonlu ve sıralı adımlar bütünüdür.',
+formula:'Girdi → işlem → çıktı.',
+symbols:'Başlangıç, işlem, karar, çıktı.',
+tip:'Adımları sıraya koy.',
+warning:'Bir adımın ne zaman çalışacağını açıkça belirt.',
+example:'İki sayının büyüğünü bulmak için karşılaştırma yapılır.',
+practice:'Kahve yapma adımları bile bir algoritma örneği olabilir.'
+},
+
+/* FİZİK */
+
+'Fizik Bilimine Giriş':{
+intro:'Fizik madde, enerji, hareket, kuvvet ve doğadaki etkileşimleri inceleyen temel bilimdir.',
+formula:'Temel nicelikler: uzunluk, kütle, zaman, sıcaklık, elektrik akımı, madde miktarı, ışık şiddeti.',
+symbols:'SI birimleri: m, kg, s, K, A, mol, cd.',
+tip:'Niceliğin skaler mi vektörel mi olduğunu belirle.',
+warning:'Birim dönüşümlerini kontrol et.',
+example:'5 km=5000 m.',
+practice:'2 dakika=120 saniyedir.'
+},
+
+'Vektörler':{
+intro:'Vektörlerin büyüklüğü ve yönü vardır. Kuvvet ve yer değiştirme gibi nicelikler vektöreldir.',
+formula:'Aynı doğrultuda aynı yönlü vektörler toplanır; zıt yönlüler çıkarılır.',
+symbols:'→A vektör gösterimidir.',
+tip:'Vektörleri oklarla çiz.',
+warning:'Skaler sayılar gibi yalnızca büyüklükleri toplayamazsın.',
+example:'5 N doğu + 3 N doğu = 8 N doğu.',
+practice:'8 N doğu + 3 N batı = 5 N doğu.'
+},
+
+'Hareket':{
+intro:'Hareket, bir cismin seçilen referans noktasına göre konumunun zamanla değişmesidir.',
+formula:'Sürat=alınan yol/zaman. Ortalama hız=yer değiştirme/zaman.',
+symbols:'v hız, t zaman, x konum.',
+tip:'Sürat ile hızın yön farkını düşün.',
+warning:'Alınan yol ile yer değiştirme aynı değildir.',
+example:'100 m yol 20 s’de alınırsa ortalama sürat 5 m/s.',
+practice:'60 m/10 s=6 m/s.'
+},
+
+'Newton Hareket Yasaları':{
+intro:'Newton yasaları kuvvet ile hareket arasındaki ilişkiyi açıklar.',
+formula:'F_net=m·a.',
+symbols:'F kuvvet (N), m kütle (kg), a ivme (m/s²).',
+tip:'Önce net kuvveti bul.',
+warning:'Tüm kuvvetlerin yönlerini dikkate al.',
+example:'2 kg cisme 10 N net kuvvet → a=5 m/s².',
+practice:'4 kg ve 12 N → a=3 m/s².'
+},
+
+'Bir Boyutta Hareket':{
+intro:'Bir doğrultu üzerindeki hareket konum, hız ve ivmeyle incelenir.',
+formula:'v=v₀+at; x=x₀+v₀t+½at².',
+symbols:'v₀ ilk hız, a ivme.',
+tip:'Başlangıç koşullarını yaz.',
+warning:'Birimleri aynı sisteme çevir.',
+example:'v₀=0,a=2,t=3 → v=6 m/s.',
+practice:'2 m/s ilk hız ve 3 m/s² ivme ile 4 s sonra v=14 m/s.'
+},
+
+'Kuvvet ve Hareket I':{
+intro:'Kuvvet cisimlerin hareketini değiştirebilen vektörel bir etkidir.',
+formula:'F_net=m·a.',
+symbols:'N, kg, m/s².',
+tip:'Serbest cisim diyagramı çiz.',
+warning:'Kuvvetleri yönleriyle yaz.',
+example:'Sağa 10 N, sola 4 N → net 6 N sağa.',
+practice:'Net kuvvet sıfırsa ivme sıfırdır.'
+},
+
+'Akışkanlar':{
+intro:'Sıvı ve gazlar akışkan olarak adlandırılır. Basınç ve kaldırma kuvveti önemli kavramlardır.',
+formula:'Basınç=P=F/A. Sıvı basıncı P=hρg.',
+symbols:'P basınç, ρ yoğunluk, h derinlik.',
+tip:'Derinlik arttıkça sıvı basıncının arttığını unutma.',
+warning:'Basınç kuvvet ile aynı kavram değildir.',
+example:'Alan küçülürse aynı kuvvette basınç artar.',
+practice:'ρ ve h arttıkça sıvı basıncı artar.'
+},
+
+'Enerji I':{
+intro:'Enerji iş yapabilme yeteneğidir. Mekanik sistemlerde kinetik ve potansiyel enerji önemlidir.',
+formula:'E_k=½mv²; E_p=mgh.',
+symbols:'J joule.',
+tip:'Hız kinetik enerjiyi güçlü biçimde etkiler.',
+warning:'Hızı iki katına çıkarmak kinetik enerjiyi dört katına çıkarır.',
+example:'m=2 kg,v=3 m/s → Ek=9 J.',
+practice:'m=4,v=2 → Ek=8 J.'
+},
+
+'İş':{
+intro:'Bir kuvvet, cismi kendi doğrultusunda yer değiştirirse fiziksel anlamda iş yapar.',
+formula:'W=F·d·cosθ.',
+symbols:'W iş (J), F kuvvet (N), d yol (m).',
+tip:'Kuvvet ile hareket arasındaki açıyı kontrol et.',
+warning:'Her kuvvet fiziksel anlamda iş yapmaz.',
+example:'10 N kuvvetle 3 m aynı yönde → W=30 J.',
+practice:'Kuvvet harekete dikse iş 0’dır.'
+},
+
+'Enerji':{
+intro:'Enerji farklı türlerde bulunabilir ve uygun koşullarda birbirine dönüşebilir.',
+formula:'Mekanik enerji E=Ek+Ep.',
+symbols:'J.',
+tip:'Sistemde enerji kaynağını belirle.',
+warning:'Enerjinin birimini joule olarak takip et.',
+example:'Ek=20 J, Ep=30 J → mekanik enerji 50 J.',
+practice:'Enerji dönüşümünde toplam enerji korunabilir.'
+},
+
+'Güç':{
+intro:'Güç, yapılan işin zamana oranıdır.',
+formula:'P=W/t.',
+symbols:'P watt (W), W iş (J).',
+tip:'Aynı işi daha kısa sürede yapanın gücü daha büyüktür.',
+warning:'Güç ile enerjiyi karıştırma.',
+example:'600 J iş 30 s’de → P=20 W.',
+practice:'100 J/5 s=20 W.'
+},
+
+'Kuvvet ve Hareket II':{
+intro:'Kuvvet ve hareketin daha ileri uygulamalarında net kuvvet, ivme ve hareket grafikleri birlikte yorumlanır.',
+formula:'F_net=m·a.',
+symbols:'F,N,m,kg,a,m/s².',
+tip:'Grafik ve kuvvet yönlerini birlikte değerlendir.',
+warning:'Net kuvveti tek bir kuvvet sanma.',
+example:'Zıt yönlü kuvvetlerin cebirsel toplamı net kuvveti verir.',
+practice:'20 N sağ, 5 N sol → 15 N sağ.'
+},
+
+'Enerji II':{
+intro:'Enerji dönüşümleri, verim ve mekanik enerji gibi kavramlar incelenir.',
+formula:'Verim=yararlı enerji/giriş enerjisi×100.',
+symbols:'η verim.',
+tip:'Verimi yüzde olarak ifade et.',
+warning:'Verim 100%’den büyük olamaz.',
+example:'Giriş 500 J, yararlı 400 J → verim %80.',
+practice:'100 J giriş, 60 J yararlı → %60.'
+},
+
+'Elektrik':{
+intro:'Elektrik yükleri, elektrik alan, akım, gerilim ve direnç arasındaki ilişkileri inceler.',
+formula:'V=I·R.',
+symbols:'V volt, I amper, R ohm.',
+tip:'Ohm yasasında üçlü ilişkiyi kullan.',
+warning:'Akım ile gerilimi aynı şey sanma.',
+example:'R=5Ω,I=2A → V=10V.',
+practice:'V=12V,R=4Ω → I=3A.'
+},
+
+'Elektrik Yükü':{
+intro:'Maddede pozitif ve negatif elektrik yükleri bulunabilir. Aynı yükler iter, zıt yükler çeker.',
+formula:'Yük birimi coulombdur (C).',
+symbols:'q yük.',
+tip:'Yüklerin işaretlerine dikkat et.',
+warning:'Elektron negatif, proton pozitiftir.',
+example:'İki pozitif yük birbirini iter.',
+practice:'Pozitif-negatif yükler birbirini çeker.'
+},
+
+'Elektrik Alan':{
+intro:'Elektrik alan, elektrik yüklerinin çevresinde başka yükler üzerinde kuvvet oluşturabilecek bölgedir.',
+formula:'E=F/q.',
+symbols:'E N/C veya V/m.',
+tip:'Pozitif test yükünün kuvvet yönünü düşün.',
+warning:'Alan vektöreldir.',
+example:'10 N kuvvet 2 C yüke etki ederse E=5 N/C.',
+practice:'F=12N,q=3C → E=4N/C.'
+},
+
+'Elektrik Akımı':{
+intro:'Elektrik akımı, birim zamanda iletkenden geçen yük miktarıdır.',
+formula:'I=Q/t.',
+symbols:'I amper, Q coulomb, t saniye.',
+tip:'Q’yu coulomb, t’yi saniye kullan.',
+warning:'Akım yönü ile elektron hareket yönünü karıştırma.',
+example:'20 C yük 4 s’de geçerse I=5 A.',
+practice:'12 C/3s=4A.'
+},
+
+'Ohm Yasası':{
+intro:'Ohm yasası direnç, akım ve gerilim arasındaki ilişkiyi verir.',
+formula:'V=I·R; I=V/R; R=V/I.',
+symbols:'V volt, I amper, R ohm.',
+tip:'Verilen iki büyüklükten üçüncüyü bul.',
+warning:'Direnç birimi ohm (Ω).',
+example:'V=20V,R=10Ω → I=2A.',
+practice:'I=3A,R=4Ω → V=12V.'
+},
+
+'Dalgalar':{
+intro:'Dalgalar enerji taşır; maddeyi net olarak bir yerden başka yere taşıması gerekmez.',
+formula:'v=λf.',
+symbols:'λ dalga boyu, f frekans, v hız.',
+tip:'Frekans artarsa hız sabitse dalga boyu azalır.',
+warning:'Frekans ile periyodu karıştırma.',
+example:'v=20m/s,f=5Hz → λ=4m.',
+practice:'v=30,f=10 → λ=3m.'
+},
+
+'Dalga Hareketi':{
+intro:'Dalga hareketinde titreşim ve yayılma özellikleri incelenir.',
+formula:'T=1/f; v=λf.',
+symbols:'T periyot, f frekans.',
+tip:'Periyot frekansın tersidir.',
+warning:'Frekansı Hz, periyodu saniye kullan.',
+example:'f=2Hz → T=0,5s.',
+practice:'f=5Hz → T=0,2s.'
+},
+
+'Ses Dalgaları':{
+intro:'Ses mekanik bir dalgadır ve yayılmak için maddesel ortama ihtiyaç duyar.',
+formula:'v=λf.',
+symbols:'Hz, m/s, m.',
+tip:'Ses boşlukta yayılmaz.',
+warning:'Sesin frekansı ile şiddetini ayır.',
+example:'Aynı ortamda frekans artarsa dalga boyu azalır.',
+practice:'Ses kaynağı değişse de ortam dalga hızını etkileyebilir.'
+},
+
+'Su Dalgaları':{
+intro:'Su yüzeyindeki dalgalar mekanik dalgalardır.',
+formula:'v=λf.',
+symbols:'λ,m; f,Hz.',
+tip:'Dalga tepeleri arasındaki uzaklık dalga boyudur.',
+warning:'Genlik ile dalga boyunu karıştırma.',
+example:'Ardışık iki tepe arası 2 m ise λ=2 m.',
+practice:'f=3Hz,v=6m/s → λ=2m.'
+},
+
+/* KİMYA */
+
+'Etkileşim':{
+intro:'Kimyasal etkileşimler atomların elektron düzenleri ve kararlı yapıya ulaşma eğilimleriyle ilişkilidir.',
+formula:'Atomlar bağ yaparken elektron alışverişi veya ortaklaşması olabilir.',
+symbols:'e⁻ elektron.',
+tip:'Önce atomların değerlik elektronlarını düşün.',
+warning:'İyonik ve kovalent bağları karıştırma.',
+example:'Na elektron vererek Na⁺ oluşturabilir.',
+practice:'Cl elektron alarak Cl⁻ oluşturabilir.'
+},
+
+'Atomun Yapısı':{
+intro:'Atom; proton, nötron ve elektronlardan oluşur. Proton ve nötron çekirdekte, elektronlar çekirdek çevresindedir.',
+formula:'Atom numarası Z=proton sayısı. Kütle numarası A=p+n.',
+symbols:'p+, n⁰, e⁻.',
+tip:'Nötr atomda proton sayısı elektron sayısına eşittir.',
+warning:'Atom numarası ile kütle numarasını karıştırma.',
+example:'11p ve 12n bulunan atomun A=23, Z=11.',
+practice:'Z=8 nötr atomda 8 elektron vardır.'
+},
+
+'Periyodik Sistem':{
+intro:'Elementler atom numaralarına göre periyodik tabloda düzenlenir.',
+formula:'Aynı gruptaki elementlerin değerlik elektronları ve kimyasal özellikleri benzerlik gösterebilir.',
+symbols:'Grup, periyot.',
+tip:'Soldan sağa atom numarası artar.',
+warning:'Grup ve periyot yönlerini karıştırma.',
+example:'Na 3. periyot 1A grubundadır.',
+practice:'Soy gazlar kararlı elektron dizilimine sahiptir.'
+},
+
+'Kimyasal Türler':{
+intro:'Atom, iyon ve molekül kimyasal türlere örnektir.',
+formula:'Katyon pozitif, anyon negatiftir.',
+symbols:'Na⁺, Cl⁻.',
+tip:'Elektron veren pozitif, alan negatif olur.',
+warning:'Proton sayısı değişirse element değişir.',
+example:'Na → Na⁺ + e⁻.',
+practice:'Cl + e⁻ → Cl⁻.'
+},
+
+'Kimyasal Bağlar':{
+intro:'Atomlar daha kararlı yapılar oluşturmak için iyonik, kovalent veya metalik bağlar oluşturabilir.',
+formula:'İyonik: elektron alışverişi. Kovalent: elektron ortaklaşması.',
+symbols:'NaCl, H₂O gibi.',
+tip:'Metal-ametal birleşimlerinde iyonik bağ sık görülür.',
+warning:'Kovalent bağda elektronlar ortaklaşır.',
+example:'NaCl iyonik, H₂O kovalent bağ içerir.',
+practice:'O₂ molekülünde kovalent bağ vardır.'
+},
+
+'Çeşitlilik':{
+intro:'Maddeler saf madde ve karışım olarak sınıflandırılabilir.',
+formula:'Saf maddeler element veya bileşik olabilir.',
+symbols:'Element, bileşik, karışım.',
+tip:'Bileşik kimyasal, karışım fiziksel yollarla ayrılabilir.',
+warning:'Karışımı bileşikle karıştırma.',
+example:'Su bileşik, hava karışımdır.',
+practice:'Tuzlu su karışımdır.'
+},
+
+'Maddenin Halleri':{
+intro:'Maddenin katı, sıvı, gaz ve uygun koşullarda plazma gibi halleri vardır.',
+formula:'Katıda tanecikler yakın ve düzenli; gazda uzak ve hareketlidir.',
+symbols:'Erime, donma, buharlaşma, yoğuşma.',
+tip:'Hal değişiminde maddenin kimliği değişmez.',
+warning:'Hal değişimini kimyasal tepkime sanma.',
+example:'Buzun erimesi fiziksel değişimdir.',
+practice:'Suyun kaynaması hal değişimidir.'
+},
+
+'Karışımlar':{
+intro:'Karışımlar birden fazla maddenin kimyasal özelliklerini büyük ölçüde koruyarak bir araya gelmesiyle oluşur.',
+formula:'Homojen karışım tek fazlı, heterojen karışım birden fazla fazlıdır.',
+symbols:'Çözelti, çözücü, çözünen.',
+tip:'Tuzlu su homojen karışımdır.',
+warning:'Her karışım çözelti değildir.',
+example:'Kum-su heterojendir.',
+practice:'Şekerli su homojendir.'
+},
+
+'Asitler ve Bazlar':{
+intro:'Asitler ve bazlar sulu çözeltilerde farklı özellik gösteren maddelerdir.',
+formula:'pH<7 asidik, pH=7 nötr, pH>7 bazik.',
+symbols:'pH.',
+tip:'pH azaldıkça asitlik artar.',
+warning:'Kuvvetli/zayıf ile derişik/seyreltik aynı değildir.',
+example:'Limon suyu asidiktir.',
+practice:'Sabun çözeltisi bazik özellik gösterebilir.'
+},
+
+'Kimyasal Tepkimeler':{
+intro:'Kimyasal tepkimelerde başlangıç maddeleri yeni maddelere dönüşür.',
+formula:'Atom sayısı korunur. Kütle korunur.',
+symbols:'Girenler → ürünler.',
+tip:'Denkleştirmede katsayıları değiştir, indisleri değiştirme.',
+warning:'Formülün alt indislerini değiştirmek maddeyi değiştirir.',
+example:'2H₂+O₂→2H₂O.',
+practice:'Denklemde H ve O atom sayıları iki tarafta eşittir.'
+},
+
+'Sürdürülebilirlik':{
+intro:'Sürdürülebilirlik doğal kaynakları gelecek nesillerin ihtiyaçlarını da düşünerek kullanmayı amaçlar.',
+formula:'Kaynakların verimli kullanımı ve atıkların azaltılması önemlidir.',
+symbols:'Geri dönüşüm, verimlilik.',
+tip:'Enerji ve madde kullanımını azaltan çözümleri düşün.',
+warning:'Sürdürülebilirlik yalnızca geri dönüşüm değildir.',
+example:'Su tüketimini azaltmak sürdürülebilirliğe katkı sağlar.',
+practice:'Yenilenebilir enerji kullanımı kaynak yönetimine katkı sağlayabilir.'
+},
+
+'Kimya ve Çevre':{
+intro:'Kimyasal maddelerin üretimi ve kullanımı çevre üzerinde etkiler oluşturabilir.',
+formula:'Atıkların azaltılması, arıtılması ve uygun şekilde yönetilmesi önemlidir.',
+symbols:'CO₂, NOₓ gibi kirleticiler.',
+tip:'Kaynağı, etkisini ve çözümünü birlikte düşün.',
+warning:'Her kimyasal madde aynı çevresel etkiye sahip değildir.',
+example:'Fosil yakıtların yanması CO₂ salımını artırabilir.',
+practice:'Atıkların ayrıştırılması çevresel yükü azaltabilir.'
+},
+
+'Enerji Kaynakları':{
+intro:'Enerji kaynakları yenilenebilir ve yenilenemez olarak sınıflandırılabilir.',
+formula:'Güneş, rüzgar, hidroelektrik yenilenebilir; kömür, petrol, doğal gaz yenilenemez kaynaklardır.',
+symbols:'kWh, J.',
+tip:'Kaynağın yenilenme hızını düşün.',
+warning:'Yenilenebilir olması çevresel etkisinin sıfır olduğu anlamına gelmez.',
+example:'Güneş enerjisi yenilenebilir kaynaktır.',
+practice:'Kömür yenilenemez bir kaynaktır.'
+}
+
+};
+
+
+/* =========================================================
+   GENEL İÇERİK ÜRETİCİ
+   Boş kalabilecek konular için ders bazlı içerik.
+========================================================= */
+
+function fallbackData(id,t){
+
+ const subject=S.find(s=>s[0]===id)?.[2]||'Ders';
+
+ if(id==='bio')return{
+  intro:`${t}, biyolojide canlıların yapısı, işleyişi ve yaşam süreçlerini anlamak için incelenen bir konudur.`,
+  formula:'Temel kavram → yapı → görev → ilişki sırasıyla düşün.',
+  symbols:'Hücre, doku, organ, sistem gibi biyolojik düzeyleri ayır.',
+  tip:'Yapının görevini ve yapısal özelliklerini birlikte düşün.',
+  warning:'Benzer organel veya süreçleri karıştırma.',
+  example:`${t} konusunda önce temel kavramları tanımla, ardından yapı-görev ilişkisini kur.`,
+  practice:`${t} için temel kavramları üç maddede özetle.`
+ };
+
+ if(id==='tarih')return{
+  intro:`${t}, tarihsel olayların nedenlerini, gelişimini ve sonuçlarını anlamaya yönelik bir konudur.`,
+  formula:'Neden → olay/süreç → sonuç → tarihsel önem.',
+  symbols:'Tarih, devlet, toplum, kültür.',
+  tip:'Olayları yalnızca ezberlemek yerine neden-sonuç ilişkisi kur.',
+  warning:'Tarihleri ve olayları birbirine karıştırma.',
+  example:`${t} için olayın nedenlerini ve sonuçlarını ayrı başlıklar halinde yaz.`,
+  practice:`${t} hakkında bir neden ve bir sonuç belirle.`
+ };
+
+ if(id==='cog')return{
+  intro:`${t}, insanların ve doğal çevrenin mekân üzerindeki ilişkisini anlamaya yardımcı olur.`,
+  formula:'Doğal ortam + beşerî ortam + etkileşim = coğrafi değerlendirme.',
+  symbols:'Nüfus, iklim, yer şekilleri, ekonomi.',
+  tip:'Harita ve mekân ilişkisini düşün.',
+  warning:'Doğal ve beşerî faktörleri birbirine karıştırma.',
+  example:`${t} incelenirken konum, doğal özellikler ve insan faaliyetleri birlikte değerlendirilebilir.`,
+  practice:`${t} için bir doğal ve bir beşerî faktör yaz.`
+ };
+
+ if(id==='fel')return{
+  intro:`${t}, düşünceleri sorgulama, kavramları açıklama ve gerekçeli değerlendirme yapma becerisi kazandırır.`,
+  formula:'İddia → gerekçe → kanıt → sonuç.',
+  symbols:'Kavram, önerme, argüman.',
+  tip:'Bir düşüncenin ne söylediğinden çok neden savunulduğunu da incele.',
+  warning:'Görüş ile gerekçeyi birbirine karıştırma.',
+  example:`${t} üzerine bir iddia kurup bu iddiayı destekleyen bir gerekçe yaz.`,
+  practice:`${t} hakkında bir soru oluştur ve neden önemli olduğunu açıkla.`
+ };
+
+ if(id==='din')return{
+  intro:`${t}, dinî bilgi, değerler ve insanın anlam arayışı bağlamında ele alınan bir konudur.`,
+  formula:'Kavram → temel bilgi → değer → günlük hayat bağlantısı.',
+  symbols:'İnanç, ibadet, ahlak, değer.',
+  tip:'Temel kavramların anlamlarını doğru öğren.',
+  warning:'Kavramları bağlamından koparma.',
+  example:`${t} konusunu çalışırken önce temel kavramları tanımla, sonra günlük hayatla ilişkilendir.`,
+  practice:`${t} ile ilgili üç temel kavram yaz.`
+ };
+
+ if(id==='edeb')return{
+  intro:`${t}, Türk dili ve edebiyatında metnin anlamını, dilini, yapısını ve estetik özelliklerini incelemeye yardımcı olur.`,
+  formula:'Metin → dil → yapı → tema → yorum.',
+  symbols:'Tema, dil, anlatım, tür.',
+  tip:'Metnin ana düşüncesi ile temasını ayır.',
+  warning:'Yazarın söylediği ile okuyucunun yorumunu karıştırma.',
+  example:`${t} incelenirken metnin konusu, teması ve kullanılan dil birlikte değerlendirilir.`,
+  practice:`${t} için bir tema ve bir anlatım özelliği belirle.`
+ };
+
+ return{
+  intro:`${t}, ${subject} dersinin temel konularından biridir. Önce kavramları öğrenmek, sonra aralarındaki ilişkileri kurmak ve soru üzerinde uygulamak gerekir.`,
+  formula:'Tanım → temel kural → uygulama → kontrol.',
+  symbols:'Soruda verilen nicelik ve kavramların sembollerini belirle.',
+  tip:'Soruyu okumadan doğrudan işlem yapma. Verilenleri ve isteneni ayır.',
+  warning:'Benzer kavramları ve soru koşullarını birbirine karıştırma.',
+  example:`${t} sorusunda önce verilenleri belirle. Konuyla ilgili temel kuralı seç, adım adım uygula ve sonucu kontrol et.`,
+  practice:`${t} konusuyla ilgili bir soru oluştur ve önce hangi bilgilerin verildiğini belirle.`
+ };
+}
+
+function data(id,t){
+ return D[t]||fallbackData(id,t);
+}
+
+
+/* =========================================================
+   VERİTABANI
+========================================================= */
+
+function db(){
+ let x=JSON.parse(localStorage.getItem('HEDEFIM_DB')||'{}');
+ x.users??={};
+ x.session??=null;
+ x.inviteCode??='32-HEDEFIM-33';
+ return x;
+}
+
+function save(x){
+ localStorage.setItem('HEDEFIM_DB',JSON.stringify(x));
+}
+
+function u(){
+ let x=db();
+ return x.session?x.users[x.session]:null;
+}
+
+function esc(x){
+ return String(x??'').replace(/[&<>"']/g,m=>({
+ '&':'&amp;',
+ '<':'&lt;',
+ '>':'&gt;',
+ '"':'&quot;',
+ "'":'&#039;'
+ }[m]));
+}
+
+function key(id,t){
+ return id+'::'+t;
+}
+
+
+/* =========================================================
+   GİRİŞ / KAYIT
+========================================================= */
+
+function mode(m){
+ lf.classList.toggle('hidden',m!=='login');
+ rf.classList.toggle('hidden',m!=='reg');
+ lt.classList.toggle('active',m==='login');
+ rt.classList.toggle('active',m==='reg');
+}
+
+async function register(){
+
+ let n = rn.value.trim();
+ let a = ru.value.trim().toLowerCase();
+ let p = rp.value;
+ let p2 = rp2.value;
+ let e = re.value.trim().toLowerCase();
+ let invite = ric.value.trim();
+
+ if(invite !== db().inviteCode)
+   return alert('Geçersiz HEDEFİM Davet Kodu.');
+
+ if(!n || !a || !p || !p2 || !e || !invite)
+   return alert('Tüm alanları doldur.');
+
+ if(p.length < 6)
+   return alert('Şifre en az 6 karakter olmalı.');
+
+ if(p !== p2)
+   return alert('Şifreler aynı değil.');
+
+ let x = db();
+
+ if(x.users[a])
+   return alert('Bu kullanıcı adı zaten kayıtlı.');
+
+ let r = prompt('Şifre kurtarma cevabın:');
+
+ if(!r)
+   return;
+
+ try{
+
+   let cred = await window.firebaseCreateUser(
+     window.firebaseAuth,
+     e,
+     p
+   );
+
+   x.users[a] = {
+
+     name:n,
+     username:a,
+     email:e,
+     uid:cred.user.uid,
+
+     recovery:r.toLowerCase().trim(),
+
+     progress:{},
+     quiz:{},
+     custom:[],
+     messages:[],
+     sent:[],
+     notes:[],
+     advice:[],
+     announcements:[],
+     programs:[],
+     surprises:true
+
+   };
+
+   x.session = a;
+
+   save(x);
+
+   alert('✅ Kayıt başarılı!');
+
+   open();
+
+ }catch(err){
+
+   if(err.code === 'auth/email-already-in-use')
+     return alert('Bu e-posta zaten kayıtlı.');
+
+   if(err.code === 'auth/invalid-email')
+     return alert('Geçerli bir e-posta adresi gir.');
+
+   if(err.code === 'auth/weak-password')
+     return alert('Şifre çok zayıf. En az 6 karakter kullan.');
+
+   console.error(err);
+
+   alert('Kayıt sırasında bir hata oluştu.');
+
+ }
+
+}
+
+
+
+function changeInviteCode(){
+
+  let newCode = document.getElementById('newInviteCode').value.trim();
+
+  if(!newCode)
+    return alert('Yeni davet kodunu gir.');
+
+  if(newCode.length < 5)
+    return alert('Davet kodu en az 5 karakter olmalı.');
+
+  let x = db();
+
+  x.inviteCode = newCode;
+
+  save(x);
+
+  document.getElementById('newInviteCode').value = '';
+
+  alert('✅ HEDEFİM Davet Kodu değiştirildi.');
+}
+function login(){
+
+ let a = lu.value.trim().toLowerCase();
+ let p = lp.value;
+
+ let x = db();
+
+ if(!a || !p)
+   return alert('Kullanıcı adı ve şifreyi gir.');
+
+ let user = x.users[a];
+
+ if(!user)
+   return alert('Kullanıcı adı veya şifre hatalı.');
+
+ if(!user.email)
+   return alert('Bu hesap Firebase hesabına bağlı değil.');
+
+ window.firebaseSignIn(
+   window.firebaseAuth,
+   user.email,
+   p
+ )
+ .then(()=>{
+
+   x.session = a;
+   save(x);
+   open();
+
+ })
+ .catch(err=>{
+
+   if(
+     err.code === 'auth/invalid-credential' ||
+     err.code === 'auth/wrong-password' ||
+     err.code === 'auth/user-not-found'
+   ){
+     return alert('Kullanıcı adı veya şifre hatalı.');
+   }
+
+   console.error(err);
+   alert('Giriş sırasında bir hata oluştu.');
+
+ });
+
+}
+function forgot(){
+
+ let a=prompt('Kullanıcı adı:');
+ let x=db();
+
+ a=a?.toLowerCase().trim();
+
+ if(!a||!x.users[a])return alert('Kullanıcı bulunamadı.');
+
+ let r=prompt('Kurtarma cevabı:');
+
+ if(r?.toLowerCase().trim()!==x.users[a].recovery)
+ return alert('Cevap yanlış.');
+
+ let p=prompt('Yeni şifre:');
+
+ if(!p||p.length<4)return alert('Geçersiz şifre.');
+
+ x.users[a].password=p;
+ save(x);
+
+ alert('Şifre değiştirildi.');
+}
+
+function logout(){
+
+ let x=db();
+ x.session=null;
+ save(x);
+
+ clearTimeout(surpriseTimer);
+
+ app.classList.add('hidden');
+ auth.classList.remove('hidden');
+
+ mode('login');
+}
+
+function open(){
+
+ let z=u();
+
+ if(!z)return;
+
+ auth.classList.add('hidden');
+ app.classList.remove('hidden');
+
+ uname.textContent=z.name;
+ ava.textContent=z.name[0].toUpperCase();
+
+ go('home');
+ startSurpriseTimer();
+}
+
+
+/* =========================================================
+   NAVİGASYON
+========================================================= */
+
+function go(p,...args){
+
+ document.querySelectorAll('.nav')
+ .forEach(n=>n.classList.toggle('active',n.dataset.p===p));
+
+ ({
+  home,
+  lessons,
+  progress,
+  messages,
+  live,
+  together,
+  ebrar,
+  help,
+  surprises,
+  add,
+  profile
+ }[p]||topic)(...args);
+}
+
+
+/* =========================================================
+   KONULAR
+========================================================= */
+
+function all(){
+
+ let a=[];
+
+ S.forEach(s=>
+  s[3].forEach(g=>
+   g[1].forEach(t=>
+    a.push({s,g:g[0],t,custom:false})
+   )
+  )
+ );
+
+ let z=u();
+
+ (z?.custom||[]).forEach(x=>{
+
+  let s=S.find(y=>y[0]===x.s);
+
+  if(s)
+  a.push({
+   s,
+   g:'Yeni Konular',
+   t:x.t,
+   custom:true
+  });
+
+ });
+
+ return a;
+}
+
+function pct(){
+
+ let a=all();
+ let z=u();
+
+ let d=a.filter(x=>z.progress[key(x.s[0],x.t)]?.done).length;
+
+ return a.length?Math.round(d/a.length*100):0;
+}
+
+function card(s){
+
+ let a=all().filter(x=>x.s[0]===s[0]);
+ let z=u();
+
+ let d=a.filter(x=>z.progress[key(s[0],x.t)]?.done).length;
+
+ let p=a.length?Math.round(d/a.length*100):0;
+
+ return `
+ <div class="card">
+  <div class="icon">${s[1]}</div>
+  <h3>${esc(s[2])}</h3>
+  <p class="muted">${d}/${a.length} konu tamamlandı</p>
+  <div class="progress"><div style="width:${p}%"></div></div>
+  <button class="btn" style="margin-top:10px" onclick="subject('${s[0]}')">Derse Gir →</button>
+ </div>
+ `;
+}
+
+
+/* =========================================================
+   ANA SAYFA
+========================================================= */
+
+function home(){
+
+ let z=u();
+ let a=all();
+
+ let d=a.filter(x=>z.progress[key(x.s[0],x.t)]?.done).length;
+ let advice=getAdvice();
+
+ c.innerHTML=`
+
+ <div class="hero">
+  <h1>Hoş geldin, ${esc(z.name)}! 👋</h1>
+  <p>Bugün de hedefine bir adım daha.</p>
+  <span class="chip">🎯 ${pct()}% tamamlandı</span>
+ </div>
+
+ <div class="grid">
+
+  <div class="card">
+   🎯 Genel İlerleme
+   <div class="stat">${pct()}%</div>
+   <div class="progress"><div style="width:${pct()}%"></div></div>
+  </div>
+
+  <div class="card">
+   📚 Toplam Konu
+   <div class="stat">${a.length}</div>
+  </div>
+
+  <div class="card">
+   ✅ Tamamlanan
+   <div class="stat">${d}</div>
+  </div>
+
+  <div class="card">
+   🧪 Çözülen Quiz
+   <div class="stat">${Object.keys(z.quiz||{}).length}</div>
+  </div>
+
+ </div>
+
+ <h2>💡 Ebrar'ın Sana Önerisi</h2>
+
+ <div class="advice">
+ ${advice?
+ `<b>${esc(advice)}</b>`:
+ `Şimdilik özel bir önerin yok. Çalışmaya devam! 🎯`}
+ </div>
+
+ <h2>📚 Dersler</h2>
+
+ <div class="grid">
+ ${S.map(card).join('')}
+ </div>
+ `;
+}
+
+
+/* =========================================================
+   DERSLER
+========================================================= */
+
+function lessons(){
+
+ c.innerHTML=`
+
+ <h1>📚 Dersler</h1>
+
+ <div class="card">
+  <div class="field">
+   <label>🔎 Derslerde konu ara</label>
+   <input id="lessonSearch" placeholder="Örn. fonksiyon, elektrik, atom..." oninput="lessonFilter(this.value)">
+  </div>
+ </div>
+
+ <div id="lessonCards" class="grid">
+ ${S.map(card).join('')}
+ </div>
+
+ <div id="lessonSearchResults"></div>
+ `;
+}
+
+function lessonFilter(v){
+
+ let q=v.trim().toLowerCase();
+
+ if(!q){
+  lessonSearchResults.innerHTML='';
+  return;
+ }
+
+ let results=all().filter(x=>
+  x.t.toLowerCase().includes(q)||
+  x.s[2].toLowerCase().includes(q)||
+  x.g.toLowerCase().includes(q)
+ );
+
+ lessonSearchResults.innerHTML=`
+
+ <h2>🔎 Arama Sonuçları</h2>
+
+ <div class="searchResults">
+
+ ${results.map(x=>`
+ <div class="searchItem"
+ onclick="topic('${x.s[0]}',${JSON.stringify(x.t)})">
+  <b>${x.s[1]} ${esc(x.t)}</b>
+  <div class="muted">${esc(x.s[2])} → ${esc(x.g)}</div>
+ </div>
+ `).join('')||'<div class="empty">Konu bulunamadı.</div>'}
+
+ </div>
+ `;
+}
+
+function globalSearch(v){
+
+ let q=v.trim().toLowerCase();
+
+ if(!q){
+  if(document.activeElement===globalSearch)return;
+  return;
+ }
+
+ let results=all().filter(x=>
+  x.t.toLowerCase().includes(q)||
+  x.s[2].toLowerCase().includes(q)
+ );
+
+ if(!results.length){
+  c.innerHTML=`
+   <h1>🔎 Arama</h1>
+   <div class="empty">"${esc(v)}" için konu bulunamadı.</div>
+  `;
+  return;
+ }
+
+ c.innerHTML=`
+ <h1>🔎 Arama Sonuçları</h1>
+ <p class="muted">${results.length} sonuç bulundu.</p>
+
+ <div class="searchResults">
+
+ ${results.map(x=>`
+  <div class="searchItem"
+   onclick="topic('${x.s[0]}',${JSON.stringify(x.t)})">
+   <b>${x.s[1]} ${esc(x.t)}</b>
+   <div class="muted">${esc(x.s[2])} → ${esc(x.g)}</div>
+  </div>
+ `).join('')}
+
+ </div>
+ `;
+}
+
+
+/* =========================================================
+   DERS / GRUP
+========================================================= */
+
+function subject(id){
+
+ let s=S.find(x=>x[0]===id);
+ let z=u();
+
+ let custom=(z.custom||[])
+ .filter(x=>x.s===id)
+ .map(x=>x.t);
+
+ let groups=[...s[3]];
+
+ if(custom.length)
+ groups.push(['Yeni Konular',custom]);
+
+ c.innerHTML=`
+
+ <button class="btn gray" onclick="go('lessons')">← Dersler</button>
+
+ <div class="hero">
+  <div class="subjectTitle">
+   <span style="font-size:45px">${s[1]}</span>
+   <div>
+    <h1 style="margin:0">${esc(s[2])}</h1>
+    <p>${all().filter(x=>x.s[0]===id).length} konu</p>
+   </div>
+  </div>
+ </div>
+
+ <div class="grid">
+
+ ${groups.map(g=>`
+
+ <div class="card">
+  <h3>📁 ${esc(g[0])}</h3>
+  <p class="muted">${g[1].length} konu</p>
+  <button class="btn"
+   onclick="group('${id}',${JSON.stringify(g[0])})">
+   Konuları Aç →
+  </button>
+ </div>
+
+ `).join('')}
+
+ </div>
+ `;
+}
+
+function group(id,gn){
+
+ let s=S.find(x=>x[0]===id);
+ let g=s[3].find(x=>x[0]===gn);
+ let z=u();
+
+ if(!g){
+
+  let custom=(z.custom||[])
+  .filter(x=>x.s===id)
+  .map(x=>x.t);
+
+  if(gn==='Yeni Konular')
+  g=['Yeni Konular',custom];
+ }
+
+ if(!g)return subject(id);
+
+ c.innerHTML=`
+
+ <button class="btn gray" onclick="subject('${id}')">
+ ← ${esc(s[2])}
+ </button>
+
+ <h1>📁 ${esc(gn)}</h1>
+
+ <div class="list">
+
+ ${g[1].map(t=>{
+
+  let st=z.progress[key(id,t)]||{};
+
+  return `
+  <div class="topic">
+
+   <div>
+    <b>${esc(t)}</b>
+    <div class="muted">
+     ${st.done?'Tamamlandı':'Başlanmadı'}
+     ${st.last?` • ${new Date(st.last).toLocaleDateString('tr-TR')}`:''}
+    </div>
+   </div>
+
+   <div>
+    <span class="badge ${st.done?'done':''}">
+     ${st.done?'🟢 Tamamlandı':'⚪ Başlanmadı'}
+    </span>
+
+    <button class="btn"
+     onclick="topic('${id}',${JSON.stringify(t)})">
+     Öğren →
+    </button>
+   </div>
+
+  </div>
+  `;
+
+ }).join('')}
+
+ </div>
+ `;
+}
+
+
+/* =========================================================
+   KONU SAYFASI
+========================================================= */
+
+function topic(id,t){
+
+ let z=u();
+ let k=key(id,t);
+ let d=data(id,t);
+
+ z.progress[k]={
+  ...(z.progress[k]||{}),
+  started:true,
+  last:Date.now()
+ };
+
+ save(db());
+
+ let q=z.quiz?.[k];
+
+ let s=S.find(x=>x[0]===id);
+ let groupName='';
+
+ if(s){
+  let g=s[3].find(g=>g[1].includes(t));
+  if(g)groupName=g[0];
+ }
+
+ if(!groupName&&z.custom?.some(x=>x.s===id&&x.t===t))
+ groupName='Yeni Konular';
+
+ c.innerHTML=`
+
+ <div class="row" style="margin-bottom:15px">
+
+ <button class="btn gray"
+ onclick="group('${id}',${JSON.stringify(groupName)})">
+ ← Konu listesi
+ </button>
+
+ <button class="btn gray" onclick="window.print()">
+ 🖨️ Yazdır
+ </button>
+
+ </div>
+
+ <div class="lesson">
+
+ <div class="hero">
+  <h1>📖 ${esc(t)}</h1>
+  <p>${esc(s?.[2]||'Ders')}</p>
+ </div>
+
+ <div class="lessonbox">
+
+  <h3>📖 Konu Anlatımı</h3>
+
+  <p>${esc(d.intro)}</p>
+
+ </div>
+
+ <div class="lessonbox formula">
+
+  <h3>🧮 Formüller / Önemli Bilgiler</h3>
+
+  <p>${esc(d.formula)}</p>
+
+ </div>
+
+ <div class="lessonbox">
+
+  <h3>📏 Birimler / Semboller</h3>
+
+  <p>${esc(d.symbols)}</p>
+
+ </div>
+
+ <div class="lessonbox tip">
+
+  <h3>💡 İpuçları</h3>
+
+  <p>${esc(d.tip)}</p>
+
+ </div>
+
+ <div class="lessonbox warning">
+
+  <h3>⚠️ Dikkat Edilmesi Gerekenler</h3>
+
+  <p>${esc(d.warning)}</p>
+
+ </div>
+
+ <div class="lessonbox example">
+
+  <h3>✏️ Çözümlü Örnek</h3>
+
+  <p>${esc(d.example)}</p>
+
+ </div>
+
+ <div class="lessonbox practice">
+
+  <h3>📝 Alıştırma</h3>
+
+  <p>${esc(d.practice)}</p>
+
+ </div>
+
+ <div class="lessonbox">
+
+  <h3>🧪 7 Soruluk Quiz + 5 YKS Sorusu</h3>
+
+  <p class="muted">
+  Toplam 12 soru. İlk 7 soru konu bilgisi, son 5 soru YKS tarzı uygulama sorusudur.
+  </p>
+
+  <button class="btn"
+   onclick="quiz('${id}',${JSON.stringify(t)})">
+   🧪 Quize Başla
+  </button>
+
+  ${q?
+   `<p><b>Son sonuç:</b> ${q.score}/${q.total} • ${new Date(q.date).toLocaleDateString('tr-TR')}</p>`:
+   ''
+  }
+
+ </div>
+
+ <div class="lessonbox">
+
+  <button class="btn green"
+   onclick="complete('${id}',${JSON.stringify(t)})">
+   ✓ Konuyu Tamamla
+  </button>
+
+ </div>
+
+ </div>
+ `;
+}
+
+
+/* =========================================================
+   QUIZ BANKASI
+========================================================= */
+
+const QUIZ_BANK={
+
+'Sayılar':[
+['Aşağıdakilerden hangisi rasyonel sayıdır?',['√2','π','3/5','√7'],2],
+['-4 sayısı hangi kümeye kesinlikle aittir?',['Doğal','Tam','İrrasyonel','Hiçbiri'],1],
+['0,25 aşağıdakilerden hangisine eşittir?',['1/2','1/4','2/5','3/4'],1],
+['√9 kaçtır?',['2','3','4','9'],1],
+['Aşağıdakilerden hangisi irrasyoneldir?',['0,5','-2','√3','7'],2],
+['5/2 sayısının ondalık gösterimi nedir?',['1,5','2','2,5','5'],2],
+['N⊂Z⊂Q⊂R zincirinde Q neyi temsil eder?',['Doğal','Tam','Rasyonel','Gerçek'],2]
+],
+
+'Üslü Sayılar':[
+['2³·2² işleminin sonucu kaçtır?',['16','32','64','128'],1],
+['3⁰ kaçtır?',['0','1','3','-1'],1],
+['5²/5 işlemi kaçtır?',['1','5','10','25'],1],
+['(2³)² kaçtır?',['16','32','64','128'],2],
+['2⁻² kaçtır?',['-4','-1/4','1/4','4'],2],
+['2⁴·2³=2ⁿ ise n kaçtır?',['6','7','8','12'],1],
+['3²+3² kaçtır?',['3⁴','18','12','9'],1]
+],
+
+'Köklü Sayılar':[
+['√48 sade biçimde nedir?',['2√12','4√3','6√2','3√4'],1],
+['√25 kaçtır?',['-5','0','5','25'],2],
+['√12·√3 kaçtır?',['3','6','√15','12'],1],
+['√50 aşağıdakilerden hangisidir?',['5√2','2√5','10√5','25√2'],0],
+['√8+√8 kaçtır?',['√16','2√8','4√2','8'],2],
+['√18 kaçtır?',['3√2','2√3','6√2','9√2'],0],
+['√(x²) ifadesi gerçek sayılarda nedir?',['x','-x','|x|','x²'],2]
+],
+
+'Bölünebilme Kuralları':[
+['234 sayısı aşağıdakilerden hangisine kesinlikle bölünür?',['5','7','9','11'],2],
+['Bir sayının son basamağı 0 ise sayı kesinlikle hangisine bölünür?',['3','5','10','9'],2],
+['372 sayısının rakamları toplamı kaçtır?',['10','11','12','13'],2],
+['725 sayısı hangisine bölünür?',['2','3','5','9'],2],
+['540 sayısı aşağıdakilerden hangisine bölünmez?',['2','5','9','10'],2],
+['Rakamları toplamı 18 olan bir sayı hangisine kesinlikle bölünür?',['2','3','5','9'],3],
+['Son basamağı 6 olan sayı kesinlikle hangisine bölünür?',['2','5','10','9'],0]
+],
+
+'EBOB-EKOK':[
+['12 ve 18’in EBOB’u kaçtır?',['3','6','9','12'],1],
+['12 ve 18’in EKOK’u kaçtır?',['24','30','36','72'],2],
+['EBOB(8,12) kaçtır?',['2','4','6','8'],1],
+['EKOK(8,12) kaçtır?',['12','16','24','48'],2],
+['EBOB·EKOK hangi ifadeye eşittir?',['a+b','a-b','a·b','a/b'],2],
+['6 ve 15’in EBOB’u kaçtır?',['1','3','5','6'],1],
+['4 ve 10’un EKOK’u kaçtır?',['10','20','30','40'],1]
+],
+
+'Denklemler':[
+['2x+4=10 ise x kaçtır?',['2','3','4','5'],1],
+['3x=15 ise x kaçtır?',['3','5','6','15'],1],
+['x-7=2 ise x kaçtır?',['5','7','9','14'],2],
+['4x-8=0 ise x kaçtır?',['-2','0','2','8'],2],
+['5x+5=20 ise x kaçtır?',['2','3','4','5'],1],
+['2(x+3)=14 ise x kaçtır?',['3','4','5','7'],1],
+['x/4=6 ise x kaçtır?',['10','20','24','28'],2]
+],
+
+'Eşitsizlikler':[
+['2x<8 ise x hangi aralıktadır?',['x<2','x<4','x>4','x≤4'],1],
+['-2x>6 ise hangisi doğrudur?',['x>3','x<-3','x> -3','x<3'],1],
+['3x+1≤10 ise x?',['x≤2','x≤3','x≥3','x<4'],1],
+['x-5>0 ise x?',['x<5','x≤5','x>5','x≥5'],2],
+['-x<4 ise x?',['x<-4','x>-4','x<4','x>4'],1],
+['2x+6≥10 ise x?',['x≥1','x≥2','x≤2','x>8'],1],
+['-3x≤9 ise x?',['x≤-3','x≥-3','x≤3','x≥3'],1]
+],
+
+'Oran-Orantı':[
+['2/5=x/20 ise x kaçtır?',['4','6','8','10'],2],
+['3/4=x/12 ise x kaçtır?',['6','8','9','12'],2],
+['5/10 oranının sade hali nedir?',['1/5','1/2','2/5','5/2'],1],
+['a/b=c/d ise hangi eşitlik doğrudur?',['a+b=c+d','ad=bc','ac=bd','a-b=c-d'],1],
+['2:3 oranında toplam 25 ise küçük sayı kaçtır?',['8','10','12','15'],1],
+['4/7=x/21 ise x kaçtır?',['8','10','12','14'],2],
+['Bir sayının 2/3’ü 10 ise sayı kaçtır?',['12','15','18','20'],1]
+],
+
+'Fonksiyonlar':[
+['f(x)=2x+1 ise f(3) kaçtır?',['5','6','7','8'],2],
+['f(x)=x² ise f(-2) kaçtır?',['-4','-2','2','4'],3],
+['Bir fonksiyonda her girdinin kaç çıktısı olmalıdır?',['0','en fazla bir','en az iki','iki'],1],
+['f(x)=x+5 ise f(0) kaçtır?',['0','1','5','10'],2],
+['f(x)=3x-2 ise f(2) kaçtır?',['2','4','6','8'],1],
+['f(x)=x²+1 ise f(1) kaçtır?',['1','2','3','4'],1],
+['f(x)=5 sabit fonksiyonunda f(100) kaçtır?',['0','5','100','500'],1]
+],
+
+'Fonksiyon Çeşitleri':[
+['Farklı girdilerin farklı çıktılara gitmesine ne denir?',['Örten','Bire bir','Sabit','Parçalı'],1],
+['Hedef kümesinde açıkta eleman kalmıyorsa fonksiyon hangi özelliğe sahiptir?',['Bire bir','Örten','Sabit','Ters'],1],
+['f(x)=5 fonksiyonu hangi türdedir?',['Sabit','Bire bir','Birim','Ters'],0],
+['Bire bir fonksiyonda farklı x değerlerinin görüntüleri nasıl olmalıdır?',['Aynı','Farklı','Sıfır','Negatif'],1],
+['Örten fonksiyonda hedef kümede ne olmaz?',['Eleman','Açıkta eleman','Fonksiyon','Girdi'],1],
+['Hem bire bir hem örten fonksiyon ne olarak da adlandırılabilir?',['Bağıntı','Bireşme','Permütasyon','Sabit'],1],
+['Sabit fonksiyon genellikle bire bir midir?',['Evet','Hayır','Sadece 0’da','Her zaman'],1]
+],
+
+'Doğrusal Fonksiyonlar':[
+['f(x)=3x+2 fonksiyonunun eğimi kaçtır?',['2','3','5','6'],1],
+['f(x)=-2x+5 artan mı azalan mı?',['Artan','Azalan','Sabit','Tanımsız'],1],
+['f(x)=4x-7 için y-kesişimi nedir?',['4','7','-7','-4'],2],
+['y=2x+1 doğrusunun eğimi nedir?',['1','2','-1','-2'],1],
+['y=-x+4 doğrusu hangi yönde değişir?',['Artan','Azalan','Sabit','Düşey'],1],
+['f(x)=5x ise f(2) kaçtır?',['5','7','10','12'],2],
+['Eğimi 0 olan doğru nasıldır?',['Düşey','Yatay','Parabol','Çember'],1]
+],
+
+'Mutlak Değerli Fonksiyonlar':[
+['|-7| kaçtır?',['-7','0','7','14'],2],
+['|x|=4 denkleminin çözümleri?',['4','-4','±4','0'],2],
+['|x-3|=2 ise x değerleri?',['1 ve 5','2 ve 3','-1 ve 5','1 ve 3'],0],
+['|0| kaçtır?',['-1','0','1','Tanımsız'],1],
+['Mutlak değer sonucu negatif olabilir mi?',['Evet','Hayır','Sadece x<0','Bazen'],1],
+['|-5|+|2| kaçtır?',['3','5','7','-7'],2],
+['|x|=0 ise x?',['-1','0','1','±1'],1]
+],
+
+'Ters Fonksiyonlar':[
+['Ters fonksiyonda temel ilişki nedir?',['f+f⁻¹=0','f(f⁻¹(x))=x','f·f⁻¹=1','f-f⁻¹=x'],1],
+['f(x)=x+5 ise ters fonksiyon nedir?',['x+5','x-5','5-x','x/5'],1],
+['f(x)=2x ise f⁻¹(x)?',['2x','x+2','x/2','-2x'],2],
+['Ters fonksiyonda x ve y için ne yapılır?',['Silinir','Değiştirilir','Toplanır','Kare alınır'],1],
+['Bir fonksiyonun tersinin fonksiyon olması için hangi özellik önemlidir?',['Bire bir olması','Sabit olması','Negatif olması','Çift olması'],0],
+['f(x)=3x-6 ise f⁻¹(x)?',['x/3+2','3x+6','x-2','3x-2'],0],
+['f(x)=x ise tersi nedir?',['0','1','x','-x'],2]
+],
+
+'Geometrik Şekiller':[
+['Üçgenin alanı nasıl bulunur?',['a+b','a·b','taban·yükseklik/2','2a+2b'],2],
+['Dikdörtgenin alanı?',['2(a+b)','a+b','a·b','a/b'],2],
+['Üçgen iç açıları toplamı?',['90','180','270','360'],1],
+['Dörtgen iç açıları toplamı?',['90','180','270','360'],3],
+['Çemberin çevresi?',['πr²','2πr','πd²','r²'],1],
+['Karenin bir kenarı 5 ise alanı?',['10','20','25','30'],2],
+['Dikdörtgen 4×7 ise çevresi?',['11','22','28','44'],1]
+],
+
+'Eşlik ve Benzerlik':[
+['Benzerlik oranı 2 ise alan oranı kaçtır?',['2','4','6','8'],1],
+['Benzer şekillerde karşılıklı kenarlar nasıldır?',['Toplam','Orantılı','Eşit olmak zorunda','Sıfır'],1],
+['Eş şekillerde karşılıklı kenarlar?',['Eşit','Orantısız','Sıfır','Rastgele'],0],
+['Benzerlik oranı 3 ise çevre oranı?',['3','6','9','12'],0],
+['Benzerlik oranı 4 ise alan oranı?',['4','8','12','16'],3],
+['Bir üçgenin tüm kenarları aynı oranda büyürse şekil?',['Benzer olabilir','Mutlaka farklı','Çember','Daire'],0],
+['Eşlikte açılar nasıldır?',['Farklı','Karşılıklı eşit','Sıfır','Sadece biri eşit'],1]
+],
+
+'Sinüs-Kosinüs':[
+['sinθ hangi oranla ifade edilir?',['Komşu/hipotenüs','Karşı/hipotenüs','Karşı/komşu','Hipotenüs/karşı'],1],
+['cosθ nedir?',['Karşı/hipotenüs','Komşu/hipotenüs','Karşı/komşu','Hipotenüs/komşu'],1],
+['3-4-5 dik üçgeninde 3 karşı kenarsa sinθ?',['3/4','3/5','4/5','5/3'],1],
+['3-4-5 üçgeninde 4 komşu kenarsa cosθ?',['3/5','4/5','3/4','5/4'],1],
+['tanθ nedir?',['Karşı/komşu','Komşu/karşı','Karşı/hipotenüs','Hipotenüs/karşı'],0],
+['sin30° kaçtır?',['0','1/2','√2/2','1'],1],
+['cos60° kaçtır?',['0','1/2','√2/2','1'],1]
+],
+
+'Elektrik':[
+['Ohm yasası hangisidir?',['V=IR','V=I/R','I=VR','R=VI'],0],
+['V=12V,R=4Ω ise I kaç A?',['2','3','4','48'],1],
+['Elektrik akımının birimi?',['Volt','Ohm','Amper','Joule'],2],
+['Direncin birimi?',['A','V','Ω','C'],2],
+['V=20V,I=2A ise R?',['5Ω','10Ω','20Ω','40Ω'],1],
+['Akım hangi sembolle gösterilir?',['V','I','R','P'],1],
+['Gerilim hangi sembolle gösterilir?',['I','V','R','Q'],1]
+],
+
+'Ohm Yasası':[
+['V=I·R ifadesinde I neyi gösterir?',['Gerilim','Akım','Direnç','Güç'],1],
+['I=3A,R=4Ω ise V?',['7','12','1','24'],1],
+['V=10V,R=5Ω ise I?',['1','2','5','50'],1],
+['V=20V,I=4A ise R?',['4','5','8','16'],1],
+['Direnç sabitken gerilim artarsa akım ne olur?',['Azalır','Artar','Sıfır olur','Değişmez'],1],
+['Akım sabitken direnç artarsa gerilim?',['Artar','Azalır','Sıfır','Değişmez'],0],
+['Ohm birimi hangisidir?',['A','V','Ω','W'],2]
+],
+
+'Elektrik Akımı':[
+['I=Q/t ifadesinde Q nedir?',['Güç','Yük','Gerilim','Direnç'],1],
+['20 C yük 4 saniyede geçerse I?',['4A','5A','8A','16A'],1],
+['12 C/3s kaç A?',['2','3','4','6'],2],
+['Akımın SI birimi?',['Volt','Amper','Ohm','Coulomb'],1],
+['Q=30C,I=5A ise t?',['5s','6s','10s','25s'],1],
+['Elektrik yükünün birimi?',['A','V','C','Ω'],2],
+['Akım hangi niceliğin zaman başına oranıdır?',['Enerji','Yük','Direnç','Güç'],1]
+],
+
+'Newton Hareket Yasaları':[
+['Net kuvvet hangi bağıntıyla bulunur?',['F=m/a','F=ma','F=a/m','F=m+a'],1],
+['2kg cisme 10N net kuvvet uygulanırsa ivme?',['2','5','10','20'],1],
+['Net kuvvet sıfırsa ivme?',['1','-1','0','Sonsuz'],2],
+['Kuvvetin SI birimi?',['kg','N','J','W'],1],
+['4kg cisim 12N net kuvvet → a?',['2','3','4','48'],1],
+['Kuvvet vektörel midir?',['Evet','Hayır','Sadece bazen','Sadece 0 iken'],0],
+['Kütle sabitken net kuvvet artarsa ivme?',['Artar','Azalır','Değişmez','Sıfır'],0]
+],
+
+'Dalgalar':[
+['Dalga hızı hangi bağıntıyla bulunur?',['v=f/λ','v=λf','v=λ/f','v=f+λ'],1],
+['v=20m/s,f=5Hz ise λ?',['2','4','5','10'],1],
+['Frekansın birimi?',['m','s','Hz','N'],2],
+['Periyot ile frekans arasındaki ilişki?',['T=f','T=1/f','T=f²','T=f+1'],1],
+['f=2Hz ise T?',['2s','1s','0,5s','0,2s'],2],
+['Dalga ne taşır?',['Enerji','Sadece madde','Kütle zorunlu olarak','Hiçbir şey'],0],
+['Aynı hızda frekans artarsa dalga boyu?',['Artar','Azalır','Değişmez','Sıfır olur'],1]
+],
+
+'Atomun Yapısı':[
+['Atom numarası neye eşittir?',['Nötron','Proton','Elektron+proton','Kütle'],1],
+['Nötr atomda proton sayısı ile ne eşittir?',['Nötron','Elektron','Kütle','Grup'],1],
+['Kütle numarası nasıl bulunur?',['p-n','p+n','e+n','p/e'],1],
+['11 proton ve 12 nötronlu atomun kütle numarası?',['11','12','23','24'],2],
+['Elektronun yükü?',['Pozitif','Negatif','Nötr','Değişken'],1],
+['Protonun yükü?',['Pozitif','Negatif','Nötr','Sıfır'],0],
+['Nötronun yükü?',['Pozitif','Negatif','Nötr','Çift'],2]
+],
+
+'Periyodik Sistem':[
+['Elementler hangi sayıya göre sıralanır?',['Kütle','Atom numarası','Nötron','Elektron'],1],
+['Aynı gruptaki elementlerin hangi özellikleri benzer olabilir?',['Kimyasal','Kütle','Renk zorunlu olarak','Hal zorunlu olarak'],0],
+['Na hangi gruptadır?',['1A','2A','7A','8A'],0],
+['Soy gazların temel özelliği?',['Çok reaktif','Kararlı elektron dizilimi','Metal olmaları','Her zaman katı olmaları'],1],
+['Periyodik tabloda soldan sağa atom numarası?',['Azalır','Artar','Değişmez','Sıfır'],1],
+['Halojenler hangi gruptadır?',['1A','2A','7A','8A'],2],
+['Periyot neyi gösterir?',['Katman sayısıyla ilişkili','Nötron sayısı','Kütle','Yük'],0]
+],
+
+'Kimyasal Bağlar':[
+['İyonik bağ genellikle hangi atomlar arasında oluşur?',['Metal-ametal','Ametal-ametal','Soy gaz-soy gaz','Sadece metaller'],0],
+['Kovalent bağda ne olur?',['Elektron ortaklaşması','Proton alışverişi','Nötron alışverişi','Çekirdek bölünmesi'],0],
+['NaCl hangi bağ türüne örnektir?',['İyonik','Kovalent','Metalik','Hidrojen'],0],
+['H₂O molekülündeki bağ temel olarak?',['Kovalent','İyonik','Metalik','Yok'],0],
+['Elektron veren atom ne oluşturur?',['Anyon','Katyon','Nötron','Molekül'],1],
+['Elektron alan atom ne oluşturur?',['Katyon','Anyon','Proton','Nötr'],1],
+['Metal atomlarının oluşturduğu bağ türü?',['Metalik','İyonik','Kovalent','Yok'],0]
+],
+
+'Karışımlar':[
+['Tuzlu su nasıl bir karışımdır?',['Homojen','Heterojen','Element','Bileşik'],0],
+['Kum-su nasıl bir karışımdır?',['Homojen','Heterojen','Element','Saf madde'],1],
+['Karışımlar fiziksel yollarla ayrılabilir mi?',['Evet','Hayır','Asla','Sadece gazlar'],0],
+['Çözücü nedir?',['Çözünen madde','Çözeltide miktarı fazla olan bileşen','Element','Gaz'],1],
+['Çözelti kaç fazlıdır?',['Tek fazlı','İki zorunlu','Üç','Sınırsız'],0],
+['Hava hangi tür karışımdır?',['Homojen','Heterojen','Bileşik','Element'],0],
+['Yağ-su genellikle?',['Homojen','Heterojen','Element','Bileşik'],1]
+],
+
+'Asitler ve Bazlar':[
+['pH<7 olan çözelti?',['Bazik','Asidik','Nötr','Saf'],1],
+['pH=7 neyi ifade eder?',['Asidik','Bazik','Nötr','Kuvvetli baz'],2],
+['pH>7 ise?',['Asidik','Bazik','Nötr','Gaz'],1],
+['Limon suyu genel olarak?',['Asidik','Bazik','Nötr','Tuz'],0],
+['Sabun çözeltisi genellikle?',['Asidik','Bazik','Nötr','Element'],1],
+['pH azaldıkça asitlik?',['Artar','Azalır','Değişmez','Sıfır olur'],0],
+['Kuvvetli asit ile derişik asit aynı mıdır?',['Evet','Hayır','Her zaman','Sadece pH=7'],1]
+]
+
+};
+
+
+/* =========================================================
+   OTOMATİK SORU ÜRETİCİ
+========================================================= */
+
+function generatedQuestions(id,t){
+
+ let d=data(id,t);
+
+ if(id==='mat'){
+  return [
+   [`${t} çalışırken ilk yapılması gereken nedir?`,['Verilen ve isteneni belirlemek','Rastgele formül seçmek','Soruyu okumamak','Sonucu tahmin etmek'],0],
+   [`${t} sorusunda işlemden önce ne kontrol edilmelidir?`,['Soru koşulları','Sayfanın rengi','Cevabın uzunluğu','Sadece son sayı'],0],
+   [`${t} konusunu öğrenmede en doğru sıra hangisidir?`,['Tanım-kural-uygulama','Sonuç-ezber-şans','Formül-rastgelelik','Sadece cevap'],0],
+   [`${t} sorusunda birim verilmişse ne yapılmalıdır?`,['Birimler uyumlu hale getirilmeli','Birimler silinmeli','Birimler yok sayılmalı','Sadece sayı kullanılmalı'],0],
+   [`Bir matematik sorusunda sonucu kontrol etmek neden önemlidir?`,['Hatanın fark edilmesi için','Soruyu uzatmak için','Cevabı değiştirmek için','Gerekmez'],0],
+   [`${t} için hangi çalışma yöntemi daha etkilidir?`,['Kuralı öğrenip farklı sorular çözmek','Sadece cevabı ezberlemek','Soruları atlamak','Formülleri karıştırmak'],0],
+   [`Bir soruda verilen bilgi eksik görünüyorsa ne yapılmalıdır?`,['Sorunun tüm koşulları tekrar okunmalı','Rastgele değer seçilmeli','Tahmin yapılmalı','Soru bırakılmalı'],0]
+  ];
+ }
+
+ if(id==='fiz'){
+  return [
+   [`${t} konusunda niceliklerin birimleri neden önemlidir?`,['Doğru işlem ve sonuç için','Sadece görünüş için','Hiçbir nedenle','Soruyu zorlaştırmak için'],0],
+   [`Fizik sorusunda ilk adım hangisidir?`,['Verilenleri ve isteneni belirlemek','Sonucu tahmin etmek','Formülü rastgele seçmek','Birimleri silmek'],0],
+   [`${t} sorusunda vektörel nicelik varsa neye dikkat edilir?`,['Yön ve büyüklüğe','Sadece sayıya','Sadece birime','Hiçbir şeye'],0],
+   [`Fizikte grafik sorularında ilk olarak ne incelenmelidir?`,['Eksen ve birimler','Sayfanın başlığı','Cevap uzunluğu','Sadece renk'],0],
+   [`SI birim sistemini kullanmanın amacı nedir?`,['Nicelikleri ortak sistemde ifade etmek','Soruyu uzatmak','Birimleri yok etmek','Formül kullanmamak'],0],
+   [`Bir fizik formülünde bilinmeyen aranırken ne yapılır?`,['Denklem uygun biçimde düzenlenir','Her sayı toplanır','Bütün değerler silinir','Sonuç tahmin edilir'],0],
+   [`Fizik sorusunun sonucu bulununca ne yapılmalıdır?`,['Birim ve mantık kontrolü','Soruyu silmek','Birimi kaldırmak','Sonucu değiştirmek'],0]
+  ];
+ }
+
+ if(id==='kim'){
+  return [
+   [`${t} çalışırken ilk olarak ne öğrenilmelidir?`,['Temel kavramlar','Rastgele formüller','Cevap anahtarı','Sadece sayılar'],0],
+   [`Kimya sorularında element sembollerini bilmek neden önemlidir?`,['Maddeleri doğru tanımak için','Soruyu uzatmak için','Hiçbir nedenle','Grafik çizmek için'],0],
+   [`Kimyasal tepkime sorularında ne korunur?`,['Atom sayısı','Elementlerin kimliği yok olur','Protonlar kaybolur','Kütle her zaman yok olur'],0],
+   [`Karışım sorusunda ilk bakılabilecek özellik nedir?`,['Homojen/heterojen olması','Sayfanın rengi','Sorunun uzunluğu','Cevap harfi'],0],
+   [`Asit-baz sorusunda hangi ölçek sık kullanılır?`,['pH','Hz','Volt','Newton'],0],
+   [`Periyodik tablo sorusunda hangi bilgi önemlidir?`,['Atom numarası ve grup/periyot','Sadece kütle','Sadece renk','Sayfa numarası'],0],
+   [`Kimya sorusunun sonunda ne kontrol edilmelidir?`,['Formül, katsayı ve birimler','Sadece cevap harfi','Sorunun rengi','Hiçbir şey'],0]
+  ];
+ }
+
+ return [
+  [`${t} konusunun temel amacı nedir?`,['Temel kavramları anlamak ve uygulamak','Sadece ezber yapmak','Soruyu okumamak','Rastgele cevap vermek'],0],
+  [`${t} çalışırken ilk adım nedir?`,['Temel kavramları belirlemek','Sonucu tahmin etmek','Koşulları yok saymak','Soruyu atlamak'],0],
+  [`Bir soruda verilenler neden belirlenir?`,['Doğru yöntemi seçmek için','Soruyu uzatmak için','Cevabı gizlemek için','Gerekmediği için'],0],
+  [`Konu çalışmasının ardından ne yapmak yararlıdır?`,['Soru çözmek','Konuyu unutmak','Formülleri karıştırmak','Soruları okumamak'],0],
+  [`Yanlış yapılan bir soruda ne yapılmalıdır?`,['Hatanın nedeni incelenmeli','Soru tamamen unutulmalı','Cevap rastgele değiştirilmeli','Hiç bakılmamalı'],0],
+  [`${t} konusunda başarıyı artıran yöntem hangisidir?`,['Kavram + örnek + soru çözümü','Sadece başlığı okumak','Cevabı ezberlemek','Soruları geçmek'],0],
+  [`Bir sorunun cevabı bulunduğunda ne yapılmalıdır?`,['Sonuç kontrol edilmeli','Hemen sayfa kapatılmalı','Birimler silinmeli','Koşullar unutulmalı'],0]
+ ];
+}
+
+
+/* =========================================================
+   7 + 5 QUIZ
+========================================================= */
+
+function makeQuiz(id,t){
+
+ let bank=QUIZ_BANK[t];
+
+ let first;
+
+ if(bank){
+  first=bank.slice(0,7).map(x=>({
+   q:x[0],
+   o:x[1],
+   a:x[2],
+   y:false
+  }));
+ }else{
+  first=generatedQuestions(id,t).slice(0,7).map(x=>({
+   q:x[0],
+   o:x[1],
+   a:x[2],
+   y:false
+  }));
+ }
+
+ let last=[];
+
+ if(bank){
+  last=bank.slice(0,5).map((x,i)=>({
+   q:'YKS '+(i+1)+' — '+x[0],
+   o:x[1],
+   a:x[2],
+   y:true
+  }));
+ }else{
+
+  let d=data(id,t);
+
+  last=[
+   {
+    q:`YKS 1 — ${t} sorusunda aşağıdaki çalışma yaklaşımı hangisidir?`,
+    o:[
+     'Tanımı ve verilenleri belirleyip uygun yöntemi seçmek',
+     'Soruyu okumadan işlem yapmak',
+     'Koşulları yok saymak',
+     'Sonucu rastgele seçmek'
+    ],
+    a:0,y:true
+   },
+   {
+    q:`YKS 2 — ${t} konusunda bir soruyu çözerken hangisi en doğrudur?`,
+    o:[
+     'Kavramı sorudaki bilgiyle ilişkilendirmek',
+     'Formülü rastgele seçmek',
+     'Bütün bilgileri yok saymak',
+     'Sadece cevap harfine bakmak'
+    ],
+    a:0,y:true
+   },
+   {
+    q:`YKS 3 — ${t} sorusunda hata yaptığını fark eden öğrenci ne yapmalıdır?`,
+    o:[
+     'Hatanın hangi adımda oluştuğunu incelemek',
+     'Soruyu tamamen bırakmak',
+     'Cevabı değiştirmek',
+     'Soruyu okumamak'
+    ],
+    a:0,y:true
+   },
+   {
+    q:`YKS 4 — ${t} için verilen bilgi ile istenen arasındaki ilişkiyi kurmanın amacı nedir?`,
+    o:[
+     'Uygun çözüm yolunu belirlemek',
+     'Soruyu uzatmak',
+     'Cevabı rastgele seçmek',
+     'Formülleri yok saymak'
+    ],
+    a:0,y:true
+   },
+   {
+    q:`YKS 5 — ${t} konusunda işlem sonunda ne yapılmalıdır?`,
+    o:[
+     'Sonuç ve koşullar kontrol edilmelidir',
+     'Birimler silinmelidir',
+     'Sonuç değiştirilmelidir',
+     'Sorudaki bilgiler unutulmalıdır'
+    ],
+    a:0,y:true
+   }
+  ];
+ }
+
+ return [...first,...last];
+}
+
+function quiz(id,t){
+
+ let qs=makeQuiz(id,t);
+
+ c.innerHTML=`
+
+ <button class="btn gray"
+ onclick="topic('${id}',${JSON.stringify(t)})">
+ ← Konuya dön
+ </button>
+
+ <h1>🧪 ${esc(t)} — 7 + 5 YKS</h1>
+
+ <p class="muted">
+ İlk 7 soru konu testi, son 5 soru YKS bölümüdür.
+ </p>
+
+ <div id="qa">
+
+ ${qs.map((q,i)=>`
+
+ <div class="q">
+
+  <div class="kpi">
+   ${q.y?'🎯 YKS Sorusu':'📚 Konu Sorusu'} • ${i+1}/12
+  </div>
+
+  <br>
+
+  <b>${esc(q.q)}</b>
+
+  ${q.o.map((o,j)=>`
+
+   <button class="opt"
+    onclick="sel(this,${i},${j})">
+
+    ${String.fromCharCode(65+j)}) ${esc(o)}
+
+   </button>
+
+  `).join('')}
+
+ </div>
+
+ `).join('')}
+
+ <button class="btn"
+ onclick='finish(
+ ${JSON.stringify(id)},
+ ${JSON.stringify(t)},
+ ${JSON.stringify(qs)}
+ )'>
+
+ Quiz'i Bitir
+
+ </button>
+
+ </div>
+ `;
+}
+
+function sel(b,i,j){
+
+ b.parentElement
+  .querySelectorAll('.opt')
+  .forEach(x=>x.classList.remove('sel'));
+
+ b.classList.add('sel');
+ b.dataset.a=j;
+}
+
+function finish(id,t,qs){
+
+ let score=0;
+
+ document.querySelectorAll('.q')
+ .forEach((q,i)=>{
+
+  let s=q.querySelector('.sel');
+
+  if(s&&+s.dataset.a===qs[i].a)
+  score++;
+
+ });
+
+ let x=db();
+ let z=u();
+
+ let k=key(id,t);
+
+ z.quiz[k]={
+  score,
+  total:12,
+  date:Date.now()
+ };
+
+ save(x);
+
+ let percent=Math.round(score/12*100);
+
+ let message=
+  score>=10?'🔥 Harika!':
+  score>=8?'👏 Çok iyi!':
+  score>=6?'💪 Güzel gidiyorsun!':
+  '📚 Konuyu biraz daha tekrar et.';
+
+ c.innerHTML=`
+
+ <div class="card" style="text-align:center">
+
+  <div style="font-size:60px">🎉</div>
+
+  <h1>Quiz Tamamlandı!</h1>
+
+  <div class="stat">${score}/12</div>
+
+  <h2>${message}</h2>
+
+  <p>${percent}% başarı</p>
+
+  <div class="progress">
+   <div style="width:${percent}%"></div>
+  </div>
+
+  <p>
+   7 konu sorusu + 5 YKS sorusu sonucu kaydedildi.
+  </p>
+
+  <button class="btn"
+   onclick="topic('${id}',${JSON.stringify(t)})">
+   Konuya Dön
+  </button>
+
+ </div>
+ `;
+}
+
+
+/* =========================================================
+   ÖĞRENCİ TAKİBİ
+========================================================= */
+
+function progress(){
+
+ let z=u();
+ let a=all();
+
+ let d=a.filter(x=>z.progress[key(x.s[0],x.t)]?.done).length;
+
+ let quizCount=Object.keys(z.quiz||{}).length;
+
+ let scores=Object.values(z.quiz||{});
+
+ let avg=scores.length?
+ Math.round(
+  scores.reduce((sum,x)=>sum+(x.score/x.total*100),0)/scores.length
+ ):0;
+
+ c.innerHTML=`
+
+ <h1>📊 Öğrenci Takibi</h1>
+
+ <div class="grid">
+
+ <div class="card">
+  🎯 İlerleme
+  <div class="stat">${pct()}%</div>
+  <div class="progress"><div style="width:${pct()}%"></div></div>
+ </div>
+
+ <div class="card">
+  ✅ Tamamlanan
+  <div class="stat">${d}</div>
+  <div class="muted">/ ${a.length}</div>
+ </div>
+
+ <div class="card">
+  🧪 Çözülen Quiz
+  <div class="stat">${quizCount}</div>
+ </div>
+
+ <div class="card">
+  📈 Quiz Ortalaması
+  <div class="stat">${avg}%</div>
+ </div>
+
+ </div>
+
+ <h2>Ders Bazında</h2>
+
+ <div class="list">
+
+ ${S.map(s=>{
+
+  let a2=a.filter(x=>x.s[0]===s[0]);
+
+  let d2=a2.filter(
+   x=>z.progress[key(s[0],x.t)]?.done
+  ).length;
+
+  let p=a2.length?Math.round(d2/a2.length*100):0;
+
+  return `
+  <div class="card">
+
+   <b>${s[1]} ${esc(s[2])}</b>
+
+   <span class="muted"> — ${p}%</span>
+
+   <div class="progress" style="margin-top:10px">
+    <div style="width:${p}%"></div>
+   </div>
+
+   <p class="muted">${d2}/${a2.length} konu tamamlandı</p>
+
+  </div>
+  `;
+
+ }).join('')}
+
+ </div>
+
+ <h2>🧪 Son Quiz Sonuçları</h2>
+
+ <div class="card">
+
+ ${scores.length?
+
+ Object.entries(z.quiz).slice(-8).reverse().map(([k,v])=>{
+
+  let parts=k.split('::');
+  return `
+   <div class="topic">
+    <div>
+     <b>${esc(parts[1]||k)}</b>
+     <div class="muted">
+      ${new Date(v.date).toLocaleDateString('tr-TR')}
+     </div>
+    </div>
+    <span class="badge">${v.score}/${v.total}</span>
+   </div>
+  `;
+
+ }).join(''):
+
+ '<div class="empty">Henüz quiz çözülmedi.</div>'
+ }
+
+ </div>
+ `;
+}
+
+
+/* =========================================================
+   MESAJLAR
+========================================================= */
+
+function messages(){
+
+ let z=u();
+
+ c.innerHTML=`
+
+ <h1>💬 Mesajlar</h1>
+
+ <div class="card">
+
+ <p class="muted">
+ Uygulama içindeki mesajların burada görünür.
+ </p>
+
+ <div id="msgs">
+
+ ${(z.messages||[]).map(m=>`
+
+  <div class="msg ${m.me?'me':''}">
+
+   <b>${esc(m.from||'HEDEFİM')}</b>
+
+   <br>
+
+   ${esc(m.text)}
+
+   <div class="muted" style="font-size:11px;margin-top:5px">
+    ${m.date?new Date(m.date).toLocaleString('tr-TR'):''}
+   </div>
+
+  </div>
+
+ `).join('')||'<div class="empty">Henüz mesaj yok.</div>'}
+
+ </div>
+
+ <div class="row" style="margin-top:12px">
+
+  <input id="mi" placeholder="Mesajını yaz...">
+
+  <button class="btn" onclick="sendMsg()">Gönder</button>
+
+ </div>
+
+ </div>
+ `;
+}
+
+function sendMsg(){
+
+ let t=mi.value.trim();
+
+ if(!t)return;
+
+ let x=db();
+ let z=u();
+
+ z.messages??=[];
+
+ z.messages.push({
+  from:z.name,
+  text:t,
+  me:true,
+  date:Date.now()
+ });
+
+ save(x);
+
+ messages();
+}
+
+
+/* =========================================================
+   CANLI DERS
+========================================================= */
+
+function live(){
+
+ let z=u();
+
+ c.innerHTML=`
+
+ <h1>🎥 Canlı Ders</h1>
+
+ <div class="hero">
+
+  <h2>Canlı Ders Alanı</h2>
+
+  <p>
+  Canlı ders duyuruları ve bağlantıları burada bulunacak.
+  </p>
+
+ </div>
+
+ <div class="grid">
+
+  <div class="card">
+   <h3>📅 Yaklaşan Ders</h3>
+   <p class="muted">Henüz canlı ders planlanmadı.</p>
+  </div>
+
+  <div class="card">
+   <h3>🎥 Görüşme Altyapısı</h3>
+   <p>
+   Gerçek görüntülü görüşme için sunucu/WebRTC bağlantısı gerekir.
+   </p>
+   <span class="badge">Bağlantı bekliyor</span>
+  </div>
+
+ </div>
+
+ <div class="card">
+  <h3>ℹ️ Bilgi</h3>
+  <p>
+  Bu tek dosyalık sürümde canlı video sistemi sahte şekilde aktif gösterilmez.
+  Firebase/WebRTC bağlandığında bu bölüm gerçek zamanlı hale getirilebilir.
+  </p>
+ </div>
+ `;
+}
+
+
+/* =========================================================
+   BİRLİKTE ÖĞRENELİM
+========================================================= */
+
+function together(){
+
+ c.innerHTML=`
+
+ <h1>👥 Birlikte Öğrenelim</h1>
+
+ <div class="studyRoom">
+
+  <h2>🎓 HEDEFİM Çalışma Alanı</h2>
+
+  <span class="online">
+   <span class="dot"></span>
+   Çalışma alanı hazır
+  </span>
+
+  <p>
+  Burada birlikte çalışma isteklerini ve ders planlarını takip edebilirsin.
+  </p>
+
+  <button class="btn" onclick="sendStudyRequest()">
+   👥 Birlikte Çalışma İsteği
+  </button>
+
+  <button class="btn gray" onclick="openCall()">
+   📞 Sohbet / Görüşme
+  </button>
+
+ </div>
+
+ <br>
+
+ <div class="card">
+
+  <h3>📢 Son Duyurular</h3>
+
+  <div id="announcements">
+   ${getAnnouncements()}
+  </div>
+
+ </div>
+ `;
+}
+
+function getAnnouncements(){
+
+ let z=u();
+
+ let a=z?.announcements||[];
+
+ if(!a.length)return '<div class="muted">Henüz duyuru yok.</div>';
+
+ return a.map(x=>`
+  <div class="msg">
+   📢 ${esc(x)}
+  </div>
+ `).join('');
+}
+
+function sendStudyRequest(){
+
+ let x=db();
+ let z=u();
+
+ z.messages??=[];
+
+ z.messages.push({
+  from:'HEDEFİM',
+  text:'👥 Birlikte çalışma isteğin oluşturuldu.',
+  me:false,
+  date:Date.now()
+ });
+
+ save(x);
+
+ alert('👥 Birlikte çalışma isteğin kaydedildi.');
+}
+
+function openCall(){
+
+ c.innerHTML=`
+
+ <button class="btn gray" onclick="go('together')">
+ ← Geri
+ </button>
+
+ <div class="callBox">
+
+  <div style="font-size:65px">📞</div>
+
+  <h1>Sohbet / Görüşme</h1>
+
+  <p>Görüşme alanı hazır.</p>
+
+  <p class="muted">
+   Gerçek görüntülü görüşme için WebRTC/Firebase bağlantısı gerekir.
+  </p>
+
+  <button class="btn"
+   onclick="alert('Görüşme altyapısı henüz bağlı değil.')">
+   Görüşmeyi Başlat
+  </button>
+
+ </div>
+ `;
+}
+
+
+/* =========================================================
+   EBRAR
+========================================================= */
+
+function ebrar(){
+
+ let z=u();
+
+ c.innerHTML=`
+
+ <h1>👩‍🏫 Ebrar</h1>
+
+ <div class="grid">
+
+ <div class="card">
+
+  <h2>💡 Ebrar'ın Sana Önerisi</h2>
+
+  <div class="field">
+
+   <label>Öğrenciye öneri</label>
+
+   <textarea id="adviceInput"
+   placeholder="Örn. Fonksiyonlar konusunu tekrar et."></textarea>
+
+  </div>
+
+  <button class="btn" onclick="addAdvice()">
+   Öneriyi Kaydet
+  </button>
+
+ </div>
+
+ <div class="card">
+
+  <h2>🎯 Öğrenciye Soru Patlat</h2>
+
+  <div class="field">
+
+   <label>Öğrenci</label>
+
+   <input id="studentInput"
+   placeholder="Öğrenci kullanıcı adı">
+
+  </div>
+
+  <div class="field">
+
+   <label>Soru</label>
+
+   <textarea id="questionInput"
+   placeholder="Soruyu yaz..."></textarea>
+
+  </div>
+
+  <button class="btn" onclick="sendStudentQuestion()">
+   🎯 Soruyu Gönder
+  </button>
+
+ </div>
+
+ <div class="card">
+
+  <h2>📢 Herkese Duyuru</h2>
+
+  <textarea id="announcementInput"
+   placeholder="Duyuruyu yaz..."></textarea>
+
+  <br><br>
+
+  <button class="btn" onclick="makeAnnouncement()">
+   📢 Duyuruyu Yayınla
+  </button>
+
+ </div>
+
+ <div class="card">
+
+  <h2>📅 Ebrar ile Program</h2>
+
+  <input id="programInput"
+   placeholder="Örn. 20.00 Matematik - Fonksiyonlar">
+
+  <br><br>
+
+  <button class="btn" onclick="addProgram()">
+   Programı Ekle
+  </button>
+
+ </div>
+
+ </div>
+
+ <h2>Geçmiş Öneriler</h2>
+
+ <div class="list">
+
+ ${(z.advice||[]).map(a=>`
+  <div class="card">💡 ${esc(a)}</div>
+ `).join('')||
+ '<div class="empty">Henüz öneri yok.</div>'}
+
+ </div>
+
+ <h2>📅 Programlar</h2>
+
+ <div class="list">
+
+ ${(z.programs||[]).map(a=>`
+  <div class="card">📅 ${esc(a)}</div>
+ `).join('')||
+ '<div class="empty">Henüz program yok.</div>'}
+
+ </div>
+ `;
+}
+
+function addAdvice(){
+
+ let t=adviceInput.value.trim();
+
+ if(!t)return;
+
+ let x=db();
+ let z=u();
+
+ z.advice??=[];
+ z.advice.unshift(t);
+
+ save(x);
+
+ alert('💡 Ebrar önerisi kaydedildi.');
+ ebrar();
+}
+
+function getAdvice(){
+
+ let z=u();
+
+ return z?.advice?.[0]||'';
+}
+
+function sendStudentQuestion(){
+
+ let student=studentInput.value.trim().toLowerCase();
+ let question=questionInput.value.trim();
+
+ if(!student||!question)
+ return alert('Öğrenci ve soru alanlarını doldur.');
+
+ let x=db();
+
+ if(!x.users[student])
+ return alert('Bu kullanıcı bulunamadı.');
+
+ x.users[student].messages??=[];
+
+ x.users[student].messages.push({
+  from:'Ebrar',
+  text:'🎯 Ebrar sana bir soru gönderdi: '+question,
+  me:false,
+  date:Date.now()
+ });
+
+ save(x);
+
+ alert('🎯 Soru öğrenciye gönderildi.');
+}
+
+function makeAnnouncement(){
+
+ let t=announcementInput.value.trim();
+
+ if(!t)return;
+
+ let x=db();
+
+ Object.values(x.users).forEach(student=>{
+
+  student.messages??=[];
+
+  student.messages.push({
+   from:'Ebrar',
+   text:'📢 '+t,
+   me:false,
+   date:Date.now()
+  });
+
+  student.announcements??=[];
+  student.announcements.unshift(t);
+
+ });
+
+ save(x);
+
+ alert('📢 Duyuru öğrencilere gönderildi.');
+}
+
+function addProgram(){
+
+ let t=programInput.value.trim();
+
+ if(!t)return;
+
+ let x=db();
+ let z=u();
+
+ z.programs??=[];
+ z.programs.push(t);
+
+ save(x);
+
+ alert('📅 Programa eklendi.');
+ ebrar();
+}
+
+
+/* =========================================================
+   SINAVA YARDIM
+========================================================= */
+
+function help(){
+
+ let z=u();
+
+ c.innerHTML=`
+
+ <h1>📝 Sınava Hazırlanmama Yardım Et</h1>
+
+ <div class="card">
+
+  <p>
+  Kendi notlarını HEDEFİM içine kaydedebilirsin.
+  </p>
+
+  <div class="field">
+
+   <label>Ders</label>
+
+   <select id="helpSubject">
+
+   ${S.map(s=>
+   `<option value="${s[0]}">${s[1]} ${esc(s[2])}</option>`
+   ).join('')}
+
+   </select>
+
+  </div>
+
+  <div class="field">
+
+   <label>Kendi notların</label>
+
+   <textarea id="studentNotes"
+    placeholder="Buraya kendi ders notlarını yaz..."></textarea>
+
+  </div>
+
+  <button class="btn" onclick="saveNotes()">
+   📚 Notlarımı Kaydet
+  </button>
+
+ </div>
+
+ <div class="card">
+
+  <h2>📌 Çalışma Sırası</h2>
+
+  <ol>
+   <li>Konuyu oku.</li>
+   <li>Formülleri ve önemli bilgileri incele.</li>
+   <li>Çözümlü örneği takip et.</li>
+   <li>Alıştırmayı yap.</li>
+   <li>7 + 5 quizini çöz.</li>
+   <li>Yanlışlarını tekrar et.</li>
+  </ol>
+
+ </div>
+
+ <h2>📚 Kaydettiğin Notlar</h2>
+
+ <div class="list">
+
+ ${(z.notes||[]).map(n=>`
+
+  <div class="card">
+
+   <b>${esc(n.subject)}</b>
+
+   <p>${esc(n.text)}</p>
+
+   <div class="muted">
+    ${n.date?new Date(n.date).toLocaleString('tr-TR'):''}
+   </div>
+
+  </div>
+
+ `).join('')||
+ '<div class="empty">Henüz not eklemedin.</div>'}
+
+ </div>
+ `;
+}
+
+function saveNotes(){
+
+ let s=helpSubject.value;
+ let text=studentNotes.value.trim();
+
+ if(!text)return alert('Notlarını yaz.');
+
+ let x=db();
+ let z=u();
+
+ let subject=S.find(q=>q[0]===s);
+
+ z.notes??=[];
+
+ z.notes.unshift({
+  subject:subject?.[2]||s,
+  text,
+  date:Date.now()
+ });
+
+ save(x);
+
+ alert('📚 Notların kaydedildi.');
+
+ help();
+}
+
+
+/* =========================================================
+   SÜRPRİZLER
+========================================================= */
+
+const SURPRISES=[
+
+ {emoji:'👀',text:'Seni görüyorum heeeee!',sub:'Kaçış yok, çalışıyoruz 😎'},
+ {emoji:'☕',text:'Kısa mola vakti!',sub:'Biraz dinlen, sonra devam.'},
+ {emoji:'💧',text:'Su iç leeeee!',sub:'Bir bardak su iyi gider.'},
+ {emoji:'💪',text:'Devam et!',sub:'Bugünkü küçük adım önemli.'},
+ {emoji:'🎯',text:'Hedefe gidiyorsun!',sub:'Bir konu daha hallediyoruz.'},
+ {emoji:'🧠',text:'Beyin çalışıyor!',sub:'Anlamadığın yerde tekrar yap.'},
+ {emoji:'📚',text:'Bir soru daha!',sub:'Sıradaki soru senlik olabilir.'},
+ {emoji:'😎',text:'Ben buradayım!',sub:'Şimdi o konuyu hallediyoruz.'}
+
+];
+
+function showSurprise(item){
+
+ if(!u())return;
+
+ surpriseEmoji.textContent=item.emoji;
+ surpriseText.textContent=item.text;
+ surpriseSub.textContent=item.sub;
+
+ surpriseLayer.style.display='flex';
+
+ playSurpriseSound();
+}
+
+function closeSurprise(){
+ surpriseLayer.style.display='none';
+}
+
+function randomSurprise(){
+
+ let z=u();
+
+ if(!z||z.surprises===false)return;
+
+ let item=SURPRISES[
+  Math.floor(Math.random()*SURPRISES.length)
+ ];
+
+ showSurprise(item);
+}
+
+let surpriseTimer=null;
+
+function startSurpriseTimer(){
+
+ clearTimeout(surpriseTimer);
+
+ function next(){
+
+  let minutes=[7,10,17][Math.floor(Math.random()*3)];
+
+  surpriseTimer=setTimeout(()=>{
+
+   randomSurprise();
+   next();
+
+  },minutes*60*1000);
+
+ }
+
+ next();
+}
+
+
+/* =========================================================
+   SES
+========================================================= */
+
+let selectedSound='pop';
+
+function playSurpriseSound(){
+
+ try{
+
+  const AudioContext=
+   window.AudioContext||
+   window.webkitAudioContext;
+
+  const ctx=new AudioContext();
+
+  const osc=ctx.createOscillator();
+  const gain=ctx.createGain();
+
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+
+  osc.frequency.value=
+   selectedSound==='bell'?700:
+   selectedSound==='fun'?420:
+   520;
+
+  gain.gain.setValueAtTime(.08,ctx.currentTime);
+
+  osc.start();
+
+  osc.frequency.exponentialRampToValueAtTime(
+   800,
+   ctx.currentTime+.15
+  );
+
+  osc.stop(ctx.currentTime+.18);
+
+ }catch(e){}
+}
+
+
+/* =========================================================
+   SÜRPRİZ AYARLARI
+========================================================= */
+
+function surprises(){
+
+ let z=u();
+
+ c.innerHTML=`
+
+ <h1>🎭 Sürprizler</h1>
+
+ <div class="card">
+
+  <h2>🎭 Karikatürler</h2>
+
+  <p class="muted">
+  Ders çalışırken rastgele ortaya çıkarlar.
+  </p>
+
+  <div class="setting">
+
+   <div>
+    <b>Sürprizleri aç</b>
+    <div class="muted">
+     Çalışma sırasında rastgele görünür.
+    </div>
+   </div>
+
+   <button id="surpriseSwitch"
+    class="switch ${z.surprises!==false?'on':''}"
+    onclick="toggleSurprises()">
+   </button>
+
+  </div>
+
+ </div>
+
+ <div class="card">
+
+  <h2>🔊 Ses Efekti</h2>
+
+  <select onchange="selectedSound=this.value">
+
+   <option value="pop">Pop</option>
+   <option value="bell">Zil</option>
+   <option value="fun">Komik</option>
+
+  </select>
+
+  <br><br>
+
+  <button class="btn" onclick="playSurpriseSound()">
+   🔊 Sesi Dene
+  </button>
+
+ </div>
+
+ <div class="card">
+
+  <h2>🎭 Sürprizi Şimdi Dene</h2>
+
+  <div class="grid">
+
+  ${SURPRISES.map((s,i)=>`
+
+   <button class="btn gray"
+    onclick="showSurprise(SURPRISES[${i}])">
+
+    ${s.emoji} ${s.text}
+
+   </button>
+
+  `).join('')}
+
+  </div>
+
+ </div>
+
+ <div class="card">
+
+  <h2>✏️ Kendi Sürpriz Mesajın</h2>
+
+  <input id="customSurprise"
+   placeholder="Kendi mesajını yaz...">
+
+  <br><br>
+
+  <button class="btn"
+   onclick="customSurpriseShow()">
+   🎭 Göster
+  </button>
+
+ </div>
+ `;
+}
+
+function toggleSurprises(){
+
+ let x=db();
+ let z=u();
+
+ z.surprises=z.surprises===false;
+
+ save(x);
+
+ surprises();
+}
+
+function customSurpriseShow(){
+
+ let text=customSurprise.value.trim();
+
+ if(!text)return;
+
+ showSurprise({
+  emoji:'👀',
+  text,
+  sub:'Bu mesajı sen ayarladın.'
+ });
+}
+
+
+/* =========================================================
+   YENİ KONU
+========================================================= */
+
+function add(){
+
+ let z=u();
+
+ c.innerHTML=`
+
+ <h1>➕ Yeni Konu Ekle</h1>
+
+ <div class="card" style="max-width:700px">
+
+  <div class="field">
+
+   <label>Ders</label>
+
+   <select id="ns">
+
+   ${S.map(s=>
+   `<option value="${s[0]}">${s[1]} ${esc(s[2])}</option>`
+   ).join('')}
+
+   </select>
+
+  </div>
+
+  <div class="field">
+
+   <label>Konu adı</label>
+
+   <input id="nt"
+    placeholder="Örn. Yeni Matematik Konusu">
+
+  </div>
+
+  <p class="muted">
+  Eklediğin konu seçtiğin dersin içinde "Yeni Konular" klasöründe görünür.
+  </p>
+
+  <button class="btn" onclick="addTopic()">
+   Kaydet ✅
+  </button>
+
+  <h3>Eklediğin Konular</h3>
+
+  ${(z.custom||[]).map((x,i)=>`
+
+   <div class="topic">
+
+    <div>
+     <b>${esc(x.t)}</b>
+     <div class="muted">
+      ${esc(S.find(s=>s[0]===x.s)?.[2]||x.s)}
+     </div>
+    </div>
+
+    <button class="btn red"
+     onclick="delTopic(${i})">
+     Sil
+    </button>
+
+   </div>
+
+  `).join('')||
+  '<div class="empty">Henüz yeni konu yok.</div>'}
+
+ </div>
+ `;
+}
+
+function addTopic(){
+
+ let t=nt.value.trim();
+
+ let x=db();
+ let z=u();
+
+ if(!t)return alert('Konu adını yaz.');
+
+ z.custom??=[];
+
+ let exists=
+ z.custom.some(a=>a.s===ns.value&&a.t.toLowerCase()===t.toLowerCase());
+
+ if(exists)return alert('Bu konu zaten eklenmiş.');
+
+ z.custom.push({
+  s:ns.value,
+  t
+ });
+
+ save(x);
+
+ alert('✅ Yeni konu eklendi.');
+ add();
+}
+
+function delTopic(i){
+
+ let x=db();
+ let z=u();
+
+ if(!confirm('Bu konuyu silmek istediğine emin misin?'))return;
+
+ z.custom.splice(i,1);
+
+ save(x);
+
+ add();
+}
+
+
+/* =========================================================
+   PROFİL
+========================================================= */
+
+function profile(){
+
+ let z=u();
+
+ c.innerHTML=`
+
+ <h1>👤 Profilim</h1>
+
+ <div class="card" style="max-width:650px">
+
+  <div class="avatar">
+   ${esc(z.name[0].toUpperCase())}
+  </div>
+
+  <h2>${esc(z.name)}</h2>
+
+  <p class="muted">@${esc(z.username)}</p>
+
+  <hr>
+
+<div style="margin:20px 0;padding:18px;border-radius:16px;background:#f8fafc;border:1px solid #e5e7eb">
+  <h3>⚙️ HEDEFİM Ayarları</h3>
+
+  <p class="muted">Yeni davet kodunu belirle:</p>
+
+  <input
+    id="newInviteCode"
+    type="text"
+    placeholder="Yeni davet kodu"
+    style="width:100%;padding:12px;border-radius:10px;border:1px solid #d1d5db"
+  >
+
+  <button
+    class="btn"
+    style="margin-top:10px"
+    onclick="changeInviteCode()"
+  >
+    Davet Kodunu Değiştir
+  </button>
+</div>
+  <h3>📊 Profil Özeti</h3>
+
+  <p>
+   Toplam konu: <b>${all().length}</b>
+  </p>
+
+  <p>
+   Tamamlanan: <b>
+   ${all().filter(x=>z.progress[key(x.s[0],x.t)]?.done).length}
+   </b>
+  </p>
+
+  <p>
+   Genel ilerleme: <b>${pct()}%</b>
+  </p>
+
+  <hr>
+
+  <h3>🔑 Şifre Değiştir</h3>
+
+  <input id="old" type="password"
+   placeholder="Mevcut şifre">
+
+  <br><br>
+
+  <input id="np" type="password"
+   placeholder="Yeni şifre">
+
+  <br><br>
+
+  <button class="btn" onclick="pass()">
+   Şifreyi Değiştir
+  </button>
+
+ </div>
+ `;
+}
+
+function pass(){
+
+ let x=db();
+ let z=u();
+
+ if(old.value!==z.password)
+ return alert('Mevcut şifre yanlış.');
+
+ if(np.value.length<4)
+ return alert('Yeni şifre en az 4 karakter.');
+
+ z.password=np.value;
+
+ save(x);
+
+ alert('Şifre değiştirildi.');
+
+ profile();
+}
+
+
+/* =========================================================
+   BAŞLAT
+========================================================= */
+
+window.onload=()=>{
+
+ let x=db();
+
+ if(x.session&&x.users[x.session])
+ open();
+
+};
+
+</script>
+
+</body>
+</html>
